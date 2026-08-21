@@ -1,0 +1,24 @@
+YouTube Video for Power BI
+
+Link: https://youtu.be/6cV3OwFrOkk
+
+Title: Power BI Tutorial for Beginners | Power BI Dashboard Project | Power BI Course 2023 Channel: Rishabh Mishra Duration: 44:59
+
+Description
+
+A beginner-level, end-to-end Power BI tutorial that walks through building a full dashboard project in a single video, from installing Power BI Desktop to publishing a finished dashboard with insights. Covers Power BI basics, importing data, Power Query, DAX, data modelling, and building charts/filters into a working dashboard.
+
+What I Learned From the Video
+What Power BI is and where it fits as a business intelligence/reporting tool.
+How to install Power BI Desktop and navigate the interface (Report, Data, and Model views).
+Importing data into Power BI from external files (CSV in this case).
+Power Query — how to clean and transform raw data before it's used in reports (removing errors, renaming columns, changing data types).
+DAX basics — using DAX to create simple measures and calculations from the data.
+Data modelling — setting up relationships between tables so the report can pull connected data correctly.
+Building a dashboard — adding charts, filters, and slicers, then arranging them into a clean, readable layout.
+Reading insights from a dashboard — how to look at a finished dashboard and pull out the actual business takeaways, not just build visuals for their own sake.
+
+Notes for Myself
+This is a project-based tutorial rather than a slide-based course, so it's a good one to revisit hands-on rather than just re-watching.
+Power Query and Data Modelling were the two sections most relevant to the "Reporting Analyst" side of my Tool Notes, since these are the steps before a report is ever built.
+Worth pairing with the official Microsoft Power BI documentation if I want more detail on DAX functions beyond what's shown here.

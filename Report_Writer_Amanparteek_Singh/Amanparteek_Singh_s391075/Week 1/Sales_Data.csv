@@ -1,0 +1,221 @@
+OrderID,OrderDate,Region,City,ProductID,Salesperson,UnitsSold,Revenue
+ORD1165,2026-01-01,Victoria,Geelong,P012,Aisha Khan,10,1490.0
+ORD1194,2026-01-01,New South Wales,Newcastle,P014,Tom Reid,10,790.0
+ORD1183,2026-01-01,Western Australia,Fremantle,P007,Priya Nair,1,12.5
+ORD1062,2026-01-03,Victoria,Melbourne,P002,Priya Nair,9,809.91
+ORD1026,2026-01-03,Western Australia,Perth,P011,Sam Walker,9,359.55
+ORD1213,2026-01-03,Victoria,Geelong,P011,Priya Nair,9,359.55
+ORD1155,2026-01-04,South Australia,Mount Gambier,P008,Aisha Khan,8,71.92
+ORD1050,2026-01-04,Northern Territory,Darwin,P003,Aisha Khan,7,318.5
+ORD1124,2026-01-05,Western Australia,Perth,P006,Grace Kim,4,139.96
+ORD1032,2026-01-05,Northern Territory,Alice Springs,P015,Priya Nair,5,222.5
+ORD1114,2026-01-06,South Australia,Mount Gambier,P008,Sam Walker,1,8.99
+ORD1130,2026-01-07,New South Wales,Newcastle,P007,Priya Nair,12,150.0
+ORD1082,2026-01-07,Western Australia,Perth,P007,Sam Walker,6,75.0
+ORD1055,2026-01-13,South Australia,Mount Gambier,P009,Priya Nair,9,58.41
+ORD1033,2026-01-15,Queensland,Brisbane,P002,Aisha Khan,12,1079.88
+ORD1056,2026-01-15,South Australia,Adelaide,P014,Jordan Lee,3,237.0
+ORD1113,2026-01-16,Queensland,Townsville,P007,Grace Kim,10,125.0
+ORD1157,2026-01-17,Victoria,Geelong,P002,Grace Kim,10,899.9
+ORD1083,2026-01-18,New South Wales,Newcastle,P011,Aisha Khan,9,359.55
+ORD1125,2026-01-18,Western Australia,Perth,P013,Priya Nair,1,24.99
+ORD1170,2026-01-19,Northern Territory,Darwin,P013,Tom Reid,5,124.95
+ORD1214,2026-01-19,Victoria,Geelong,P010,Grace Kim,5,299.95
+ORD1040,2026-01-19,Western Australia,Perth,P004,Jordan Lee,2,398.0
+ORD1131,2026-01-20,South Australia,Adelaide,P002,Sam Walker,12,1079.88
+ORD1073,2026-01-20,Western Australia,Perth,P009,Sam Walker,1,6.49
+ORD1010,2026-01-21,South Australia,Mount Gambier,P014,Tom Reid,11,869.0
+ORD1159,2026-01-22,Queensland,Brisbane,P009,Tom Reid,7,45.43
+ORD1003,2026-01-23,South Australia,Mount Gambier,P001,Jordan Lee,1,29.99
+ORD1008,2026-01-24,Victoria,Melbourne,P006,Tom Reid,6,209.94
+ORD1044,2026-01-25,Northern Territory,Alice Springs,P006,Aisha Khan,7,244.93
+ORD1201,2026-01-26,South Australia,Mount Gambier,P001,Priya Nair,12,359.88
+ORD1046,2026-01-26,Northern Territory,Alice Springs,P012,Jordan Lee,6,894.0
+ORD1080,2026-01-28,Victoria,Melbourne,P014,Priya Nair,8,632.0
+ORD1135,2026-01-28,Victoria,Geelong,P011,Grace Kim,8,319.6
+ORD1087,2026-01-30,Victoria,Melbourne,P005,Grace Kim,1,349.0
+ORD1038,2026-01-31,Queensland,Brisbane,P002,Jordan Lee,6,539.94
+ORD1189,2026-01-31,Western Australia,Perth,P008,Sam Walker,12,107.88
+ORD1104,2026-02-01,Victoria,Melbourne,P013,Grace Kim,8,199.92
+ORD1061,2026-02-03,Western Australia,Fremantle,P008,Jordan Lee,6,53.94
+ORD1121,2026-02-04,Victoria,Melbourne,P001,Aisha Khan,5,149.95
+ORD1102,2026-02-07,Western Australia,Perth,P015,Aisha Khan,2,89.0
+ORD1136,2026-02-09,Victoria,Melbourne,P012,Grace Kim,9,1341.0
+ORD1028,2026-02-10,Victoria,Melbourne,P012,Sam Walker,12,1788.0
+ORD1164,2026-02-10,Queensland,Brisbane,P009,Priya Nair,2,12.98
+ORD1107,2026-02-10,Western Australia,Fremantle,P008,Priya Nair,5,44.95
+ORD1085,2026-02-15,South Australia,Mount Gambier,P001,Tom Reid,2,59.98
+ORD1143,2026-02-18,Northern Territory,Darwin,P012,Aisha Khan,7,1043.0
+ORD1081,2026-02-21,Victoria,Geelong,P005,Priya Nair,4,1396.0
+ORD1126,2026-02-21,Northern Territory,Darwin,P004,Aisha Khan,3,597.0
+ORD1185,2026-02-22,New South Wales,Sydney,P015,Aisha Khan,5,222.5
+ORD1068,2026-02-23,Western Australia,Fremantle,P004,Grace Kim,11,2189.0
+ORD1096,2026-02-24,South Australia,Mount Gambier,P013,Priya Nair,12,299.88
+ORD1019,2026-02-24,South Australia,Mount Gambier,P004,Aisha Khan,11,2189.0
+ORD1042,2026-02-24,South Australia,Adelaide,P012,Tom Reid,10,1490.0
+ORD1036,2026-02-24,South Australia,Adelaide,P012,Aisha Khan,5,745.0
+ORD1054,2026-02-25,Northern Territory,Darwin,P012,Jordan Lee,6,894.0
+ORD1004,2026-02-25,Queensland,Brisbane,P009,Grace Kim,4,25.96
+ORD1103,2026-02-26,Queensland,Townsville,P001,Priya Nair,9,269.91
+ORD1002,2026-02-27,Queensland,Brisbane,P011,Tom Reid,12,479.4
+ORD1169,2026-02-27,Western Australia,Perth,P015,Priya Nair,5,222.5
+ORD1018,2026-02-28,Northern Territory,Alice Springs,P007,Jordan Lee,5,62.5
+ORD1152,2026-02-28,New South Wales,Sydney,P005,Grace Kim,1,349.0
+ORD1149,2026-03-01,Northern Territory,Darwin,P006,Grace Kim,2,69.98
+ORD1212,2026-03-01,Victoria,Geelong,P008,Grace Kim,5,44.95
+ORD1100,2026-03-04,Victoria,Melbourne,P008,Grace Kim,7,62.93
+ORD1191,2026-03-04,Victoria,Melbourne,P007,Tom Reid,4,50.0
+ORD1064,2026-03-04,New South Wales,Newcastle,P003,Tom Reid,8,364.0
+ORD1021,2026-03-05,Western Australia,Fremantle,P012,Aisha Khan,10,1490.0
+ORD1058,2026-03-05,South Australia,Adelaide,P010,Aisha Khan,2,119.98
+ORD1047,2026-03-05,Queensland,Brisbane,P009,Priya Nair,8,51.92
+ORD1182,2026-03-06,New South Wales,Sydney,P013,Tom Reid,7,174.93
+ORD1069,2026-03-09,South Australia,Mount Gambier,P005,Jordan Lee,1,349.0
+ORD1009,2026-03-09,Northern Territory,Alice Springs,P009,Aisha Khan,2,12.98
+ORD1137,2026-03-11,South Australia,Mount Gambier,P008,Grace Kim,7,62.93
+ORD1017,2026-03-11,Western Australia,Perth,P011,Jordan Lee,6,239.7
+ORD1139,2026-03-13,Victoria,Melbourne,P013,Tom Reid,8,199.92
+ORD1123,2026-03-13,Victoria,Geelong,P014,Aisha Khan,2,158.0
+ORD1007,2026-03-13,Queensland,Brisbane,P013,Jordan Lee,6,149.94
+ORD1006,2026-03-13,Northern Territory,Darwin,P012,Sam Walker,7,1043.0
+ORD1166,2026-03-16,Northern Territory,Darwin,P005,Sam Walker,12,4188.0
+ORD1154,2026-03-16,Western Australia,Perth,P011,Jordan Lee,8,319.6
+ORD1208,2026-03-18,Northern Territory,Darwin,P006,Sam Walker,1,34.99
+ORD1115,2026-03-18,Victoria,Geelong,P009,Grace Kim,12,77.88
+ORD1090,2026-03-18,South Australia,Mount Gambier,P011,Sam Walker,7,279.65
+ORD1094,2026-03-19,New South Wales,Sydney,P007,Tom Reid,10,125.0
+ORD1162,2026-03-20,South Australia,Adelaide,P010,Jordan Lee,12,719.88
+ORD1075,2026-03-20,New South Wales,Sydney,P015,Priya Nair,6,267.0
+ORD1099,2026-03-21,Queensland,Brisbane,P003,Jordan Lee,1,45.5
+ORD1110,2026-03-23,South Australia,Adelaide,P003,Priya Nair,3,136.5
+ORD1198,2026-03-23,Western Australia,Fremantle,P012,Aisha Khan,7,1043.0
+ORD1122,2026-03-25,Queensland,Townsville,P006,Aisha Khan,6,209.94
+ORD1141,2026-03-25,Queensland,Townsville,P004,Sam Walker,6,1194.0
+ORD1041,2026-03-26,Northern Territory,Darwin,P005,Aisha Khan,11,3839.0
+ORD1148,2026-03-26,New South Wales,Newcastle,P005,Sam Walker,5,1745.0
+ORD1179,2026-03-27,New South Wales,Sydney,P014,Sam Walker,3,237.0
+ORD1079,2026-03-27,Victoria,Melbourne,P005,Grace Kim,3,1047.0
+ORD1203,2026-03-28,South Australia,Mount Gambier,P011,Sam Walker,2,79.9
+ORD1142,2026-03-29,New South Wales,Newcastle,P009,Tom Reid,1,6.49
+ORD1156,2026-03-29,Queensland,Brisbane,P005,Jordan Lee,8,2792.0
+ORD1133,2026-03-30,South Australia,Mount Gambier,P011,Jordan Lee,6,239.7
+ORD1196,2026-03-30,New South Wales,Newcastle,P008,Priya Nair,6,53.94
+ORD1217,2026-04-02,South Australia,Mount Gambier,P012,Jordan Lee,5,745.0
+ORD1209,2026-04-02,New South Wales,Newcastle,P003,Tom Reid,4,182.0
+ORD1011,2026-04-03,South Australia,Adelaide,P012,Jordan Lee,2,298.0
+ORD1014,2026-04-05,New South Wales,Sydney,P011,Grace Kim,5,199.75
+ORD1013,2026-04-08,New South Wales,Newcastle,P011,Priya Nair,6,239.7
+ORD1052,2026-04-08,Northern Territory,Alice Springs,P005,Sam Walker,8,2792.0
+ORD1025,2026-04-08,South Australia,Mount Gambier,P009,Tom Reid,5,32.45
+ORD1111,2026-04-09,Western Australia,Perth,P012,Jordan Lee,4,596.0
+ORD1216,2026-04-09,Victoria,Melbourne,P004,Tom Reid,7,1393.0
+ORD1020,2026-04-12,Western Australia,Fremantle,P003,Priya Nair,5,227.5
+ORD1091,2026-04-14,Western Australia,Fremantle,P009,Priya Nair,3,19.47
+ORD1202,2026-04-15,Western Australia,Perth,P002,Sam Walker,8,719.92
+ORD1210,2026-04-16,South Australia,Adelaide,P003,Jordan Lee,3,136.5
+ORD1180,2026-04-16,Western Australia,Fremantle,P005,Aisha Khan,11,3839.0
+ORD1112,2026-04-17,Victoria,Geelong,P009,Aisha Khan,8,51.92
+ORD1092,2026-04-18,Western Australia,Fremantle,P011,Priya Nair,12,479.4
+ORD1053,2026-04-19,Western Australia,Fremantle,P003,Sam Walker,4,182.0
+ORD1215,2026-04-19,Western Australia,Fremantle,P008,Priya Nair,5,44.95
+ORD1048,2026-04-19,Queensland,Townsville,P008,Jordan Lee,4,35.96
+ORD1117,2026-04-22,Victoria,Melbourne,P007,Grace Kim,6,75.0
+ORD1088,2026-04-22,Northern Territory,Darwin,P006,Jordan Lee,7,244.93
+ORD1207,2026-04-22,Northern Territory,Darwin,P008,Grace Kim,3,26.97
+ORD1086,2026-04-22,New South Wales,Newcastle,P007,Tom Reid,10,125.0
+ORD1109,2026-04-23,Northern Territory,Alice Springs,P004,Sam Walker,5,995.0
+ORD1049,2026-04-24,South Australia,Adelaide,P001,Tom Reid,11,329.89
+ORD1177,2026-04-24,New South Wales,Sydney,P010,Grace Kim,7,419.93
+ORD1145,2026-04-25,Northern Territory,Darwin,P005,Aisha Khan,4,1396.0
+ORD1161,2026-04-26,Victoria,Geelong,P014,Aisha Khan,10,790.0
+ORD1045,2026-04-30,Western Australia,Perth,P011,Grace Kim,11,439.45
+ORD1043,2026-05-02,Queensland,Townsville,P013,Priya Nair,7,174.93
+ORD1147,2026-05-02,South Australia,Mount Gambier,P007,Tom Reid,12,150.0
+ORD1051,2026-05-04,Queensland,Townsville,P015,Priya Nair,1,44.5
+ORD1151,2026-05-04,New South Wales,Newcastle,P002,Sam Walker,4,359.96
+ORD1173,2026-05-07,Victoria,Melbourne,P010,Aisha Khan,1,59.99
+ORD1023,2026-05-07,Northern Territory,Darwin,P014,Priya Nair,2,158.0
+ORD1220,2026-05-08,New South Wales,Sydney,P010,Priya Nair,6,359.94
+ORD1200,2026-05-09,South Australia,Mount Gambier,P014,Aisha Khan,2,158.0
+ORD1029,2026-05-09,Queensland,Brisbane,P014,Sam Walker,11,869.0
+ORD1134,2026-05-10,Western Australia,Fremantle,P001,Aisha Khan,7,209.93
+ORD1063,2026-05-10,New South Wales,Sydney,P015,Jordan Lee,6,267.0
+ORD1190,2026-05-11,Western Australia,Fremantle,P007,Aisha Khan,8,100.0
+ORD1192,2026-05-11,Western Australia,Perth,P014,Sam Walker,2,158.0
+ORD1184,2026-05-13,New South Wales,Newcastle,P011,Jordan Lee,8,319.6
+ORD1105,2026-05-16,South Australia,Mount Gambier,P013,Tom Reid,8,199.92
+ORD1016,2026-05-17,Western Australia,Perth,P003,Aisha Khan,8,364.0
+ORD1153,2026-05-17,Queensland,Townsville,P001,Tom Reid,1,29.99
+ORD1150,2026-05-18,Western Australia,Perth,P004,Grace Kim,4,796.0
+ORD1031,2026-05-19,South Australia,Adelaide,P010,Aisha Khan,6,359.94
+ORD1116,2026-05-20,South Australia,Adelaide,P008,Sam Walker,4,35.96
+ORD1035,2026-05-21,Queensland,Townsville,P009,Aisha Khan,10,64.9
+ORD1188,2026-05-22,Victoria,Melbourne,P004,Aisha Khan,2,398.0
+ORD1072,2026-05-22,Western Australia,Fremantle,P009,Jordan Lee,1,6.49
+ORD1144,2026-05-23,Queensland,Townsville,P011,Aisha Khan,12,479.4
+ORD1120,2026-05-25,Western Australia,Perth,P002,Aisha Khan,11,989.89
+ORD1101,2026-05-28,Queensland,Townsville,P008,Priya Nair,7,62.93
+ORD1176,2026-05-28,Northern Territory,Darwin,P008,Grace Kim,9,80.91
+ORD1074,2026-05-30,South Australia,Adelaide,P007,Jordan Lee,3,37.5
+ORD1022,2026-05-30,Victoria,Geelong,P004,Tom Reid,3,597.0
+ORD1039,2026-05-31,South Australia,Adelaide,P010,Jordan Lee,4,239.96
+ORD1138,2026-06-01,New South Wales,Newcastle,P014,Jordan Lee,4,316.0
+ORD1160,2026-06-02,South Australia,Adelaide,P013,Aisha Khan,9,224.91
+ORD1057,2026-06-02,Northern Territory,Darwin,P007,Tom Reid,2,25.0
+ORD1211,2026-06-06,Victoria,Melbourne,P008,Priya Nair,10,89.9
+ORD1140,2026-06-06,Western Australia,Fremantle,P006,Aisha Khan,1,34.99
+ORD1093,2026-06-07,South Australia,Mount Gambier,P007,Jordan Lee,9,112.5
+ORD1077,2026-06-08,Western Australia,Perth,P015,Priya Nair,4,178.0
+ORD1098,2026-06-08,New South Wales,Sydney,P014,Grace Kim,4,316.0
+ORD1119,2026-06-09,South Australia,Adelaide,P015,Tom Reid,7,311.5
+ORD1024,2026-06-10,Queensland,Townsville,P010,Aisha Khan,2,119.98
+ORD1206,2026-06-11,Western Australia,Fremantle,P004,Jordan Lee,12,2388.0
+ORD1070,2026-06-12,Victoria,Geelong,P001,Sam Walker,1,29.99
+ORD1030,2026-06-13,South Australia,Adelaide,P003,Priya Nair,6,273.0
+ORD1001,2026-06-13,Northern Territory,Darwin,P012,Priya Nair,5,745.0
+ORD1108,2026-06-13,New South Wales,Newcastle,P011,Sam Walker,4,159.8
+ORD1005,2026-06-16,Western Australia,Fremantle,P004,Tom Reid,8,1592.0
+ORD1095,2026-06-17,New South Wales,Newcastle,P008,Grace Kim,8,71.92
+ORD1097,2026-06-18,Northern Territory,Alice Springs,P009,Grace Kim,11,71.39
+ORD1218,2026-06-18,Victoria,Geelong,P001,Grace Kim,10,299.9
+ORD1195,2026-06-18,Victoria,Melbourne,P008,Aisha Khan,9,80.91
+ORD1059,2026-06-18,South Australia,Mount Gambier,P015,Priya Nair,5,222.5
+ORD1012,2026-06-19,Queensland,Townsville,P002,Jordan Lee,4,359.96
+ORD1066,2026-06-19,Northern Territory,Darwin,P005,Jordan Lee,2,698.0
+ORD1199,2026-06-19,Western Australia,Perth,P008,Priya Nair,1,8.99
+ORD1089,2026-06-20,New South Wales,Newcastle,P011,Grace Kim,2,79.9
+ORD1037,2026-06-21,Western Australia,Fremantle,P008,Aisha Khan,9,80.91
+ORD1127,2026-06-21,Northern Territory,Darwin,P008,Sam Walker,12,107.88
+ORD1060,2026-06-21,Western Australia,Fremantle,P004,Aisha Khan,5,995.0
+ORD1175,2026-06-22,South Australia,Adelaide,P013,Sam Walker,11,274.89
+ORD1204,2026-06-22,South Australia,Mount Gambier,P006,Grace Kim,11,384.89
+ORD1084,2026-06-23,South Australia,Mount Gambier,P001,Sam Walker,2,59.98
+ORD1118,2026-06-23,Victoria,Melbourne,P014,Priya Nair,8,632.0
+ORD1015,2026-06-24,Western Australia,Perth,P010,Priya Nair,11,659.89
+ORD1076,2026-06-24,Queensland,Brisbane,P006,Aisha Khan,9,314.91
+ORD1132,2026-06-25,South Australia,Adelaide,P013,Jordan Lee,10,249.9
+ORD1158,2026-06-25,Northern Territory,Darwin,P003,Sam Walker,10,455.0
+ORD1172,2026-06-26,New South Wales,Newcastle,P005,Tom Reid,9,3141.0
+ORD1146,2026-06-27,Queensland,Townsville,P011,Sam Walker,10,399.5
+ORD1197,2026-06-28,Queensland,Townsville,P004,Jordan Lee,7,1393.0
+ORD1186,2026-06-28,Victoria,Melbourne,P001,Tom Reid,11,329.89
+ORD1167,2026-06-29,Victoria,Melbourne,P011,Sam Walker,4,159.8
+ORD1065,2026-06-30,New South Wales,Sydney,P011,Sam Walker,9,359.55
+ORD1129,2026-07-03,Northern Territory,Darwin,P005,Tom Reid,2,698.0
+ORD1174,2026-07-08,New South Wales,Newcastle,P001,Priya Nair,2,59.98
+ORD1067,2026-07-10,South Australia,Adelaide,P005,Tom Reid,5,1745.0
+ORD1171,2026-07-11,South Australia,Mount Gambier,P008,Aisha Khan,2,17.98
+ORD1205,2026-07-14,Victoria,Melbourne,P010,Priya Nair,2,119.98
+ORD1163,2026-07-15,Queensland,Brisbane,P005,Jordan Lee,11,3839.0
+ORD1027,2026-07-16,Western Australia,Fremantle,P002,Aisha Khan,5,449.95
+ORD1128,2026-07-16,New South Wales,Sydney,P010,Grace Kim,10,599.9
+ORD1193,2026-07-17,Victoria,Geelong,P015,Sam Walker,9,400.5
+ORD1071,2026-07-17,Queensland,Townsville,P003,Aisha Khan,12,546.0
+ORD1219,2026-07-19,Western Australia,Perth,P015,Grace Kim,10,445.0
+ORD1168,2026-07-21,Western Australia,Perth,P007,Tom Reid,2,25.0
+ORD1187,2026-07-24,Queensland,Brisbane,P005,Jordan Lee,9,3141.0
+ORD1078,2026-07-24,Queensland,Townsville,P001,Grace Kim,3,89.97
+ORD1034,2026-07-28,Northern Territory,Darwin,P003,Aisha Khan,11,500.5
+ORD1181,2026-07-28,South Australia,Adelaide,P008,Sam Walker,2,17.98
+ORD1178,2026-07-28,Victoria,Melbourne,P008,Aisha Khan,6,53.94
+ORD1106,2026-07-28,Western Australia,Fremantle,P014,Aisha Khan,9,711.0
