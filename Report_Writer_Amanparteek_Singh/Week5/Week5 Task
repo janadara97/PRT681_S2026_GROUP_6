@@ -1,1 +1,31 @@
-
+# Report Analyst — Learning Path
+ 
+## Week 1: Reporting Fundamentals
+ 
+### 📚 Courses
+ 
+| # | Course | Focus Area |
+|---|--------|------------|
+| 1 | **Excel: Advanced Formulas and Functions** | Spreadsheet modeling & calculations |
+| 2 | **SQL Essential Training** | Querying and data extraction |
+| 3 | **Learning Power BI** | Data visualization & dashboards |
+ 
+---
+ 
+### 🛠️ Practice Project
+ 
+**Goal:** Build a static Excel report using pivot tables and pivot charts.
+ 
+**Dataset:** Superstore dataset (or any comparable retail/sales dataset)
+ 
+**Deliverable:** A report that answers **5 stakeholder questions**, using:
+- Pivot Tables
+- Pivot Charts
+#### Stakeholder Questions to Answer
+1. What are total sales and profit by region?
+2. Which product categories generate the most revenue?
+3. Who are the top 10 customers by sales?
+4. How do sales trend month-over-month or year-over-year?
+5. Which sub-categories have the lowest profit margins?
+ 
+ 
