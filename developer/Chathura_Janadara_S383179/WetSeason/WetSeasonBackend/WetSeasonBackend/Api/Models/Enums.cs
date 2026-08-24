@@ -5,7 +5,8 @@ public enum IncidentStatus
     Reported,
     Triaged,
     Responding,
-    Resolved
+    Resolved,
+    Closed
 }
 
 public enum IncidentType
@@ -15,4 +16,14 @@ public enum IncidentType
     RoadClosure,
     Evacuation,
     InfrastructureDamage
+}
+
+public enum ResourceType
+{
+    Generator,
+    Pump,
+    Vehicle,
+    Boat,
+    Crew,
+    SatellitePhone
 }

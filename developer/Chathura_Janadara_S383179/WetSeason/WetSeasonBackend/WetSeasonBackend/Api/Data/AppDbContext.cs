@@ -10,6 +10,8 @@ public class AppDbContext : DbContext
     }
     public DbSet<Incident>  Incidents => Set<Incident>();
     public DbSet<Community> Communities => Set<Community>();
+    public DbSet<Resource> Resources => Set<Resource>();
+    public DbSet<ResourceAssignement> ResourceAssignements => Set<ResourceAssignement>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -49,8 +51,32 @@ public class AppDbContext : DbContext
             .HasForeignKey(i => i.CommunityId)
             .OnDelete(DeleteBehavior.Restrict);
         
-
+        var resource = modelBuilder.Entity<Resource>();
+        resource.Property(r => r.Name)
+            .IsRequired()
+            .HasMaxLength(120);
+        resource.Property(r => r.HomeDepot)
+            .IsRequired()
+            .HasMaxLength(120);
+        resource.Property(r=>r.Type)
+            .HasConversion<String>()
+            .HasMaxLength(30);
+        
+        var assignment = modelBuilder.Entity<ResourceAssignement>();
+        assignment.Property(a => a.AssignedAt)
+            .IsRequired();
+        
+        assignment.HasOne(a => a.Resource)
+            .WithMany(r=> r.Assignments)
+            .HasForeignKey(a => a.ResourceId)
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        assignment.HasOne(a => a.Incident)
+            .WithMany(i => i.ResourceAssignements)
+            .HasForeignKey(a => a.IncidentId)
+            .OnDelete(DeleteBehavior.Restrict);
+        assignment.HasIndex(r=>r.ResourceId)
+            .IsUnique()
+            .HasFilter("[ReleasedAt] IS NULL");
     }
-    
-    
 }

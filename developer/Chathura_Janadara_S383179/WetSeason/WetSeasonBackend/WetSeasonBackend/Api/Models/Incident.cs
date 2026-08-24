@@ -12,4 +12,5 @@ public class Incident
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     public int CommunityId { get; set; }
     public Community Community { get; set; } = null!;
+    public ICollection<ResourceAssignement> ResourceAssignements { get; set; } = new List<ResourceAssignement>();
 }

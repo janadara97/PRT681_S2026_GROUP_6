@@ -4,31 +4,23 @@ using Microsoft.EntityFrameworkCore;
 using WetSeasonBackend.Api.Data;
 using WetSeasonBackend.Api.Dtos;
 using WetSeasonBackend.Api.Models;
+using WetSeasonBackend.Api.Services;
 
 namespace WetSeasonBackend.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 
-public class IncidentController(AppDbContext db) : ControllerBase
+public class IncidentController(AppDbContext db, IncidentService incidentService) : ControllerBase
 {
   [HttpGet]
-  public async Task<ActionResult<IEnumerable<Incident>>> GetAllIncidents()
+  public async Task<ActionResult<IEnumerable<IncidentListItemDto>>> GetAllIncidents()
   {
-    var incidents = await db.Incidents
-      .OrderByDescending(i => i.CreatedAt)
-      .Select(i => new IncidentListItemDto
-      {
-        Id = i.Id,
-        Type = i.Type.ToString(),
-        Severity = i.Severity,
-        Status = i.Status.ToString(),
-        CommunityName = i.Community.Name,
-        Region = i.Community.Region,
-        ReportedBy = i.ReportedBy,
-        CreatedAt = i.CreatedAt,
-      })
-      .ToListAsync();
+    var incidents = await incidentService.getAllIncidents();
+    if (incidents is null)
+    {
+      return NotFound("Database context is not available.");
+    }
     return Ok(incidents);
   }
 
@@ -36,41 +28,49 @@ public class IncidentController(AppDbContext db) : ControllerBase
   public async Task<ActionResult<IEnumerable<Incident>>> GetIncidentById(int id)
   {
     var incident = await db.Incidents.FirstOrDefaultAsync(i => i.Id == id);
+    if (incident is null)
+    {
+      return NotFound($"Incident with ID {id} not found.");
+    }
     return Ok(incident);
   }
 
   [HttpPost]
   public async Task<ActionResult<IncidentListItemDto>> CreateIncident(CreateIncidentRequestDto request)
   {
-    var communityExists = await db.Communities.AnyAsync(c => c.Id == request.CommunityId);
-    if (!communityExists)
+    return Ok(await incidentService.CreateAsync(request));
+  }
+  
+  [HttpPut("{id:int}/transition")]
+  public async Task<ActionResult> Transition(int id)
+  {
+    var incident = await incidentService.TransitionAsync(id);
+    if (incident is null)
     {
-      return NotFound("$Community {request.CommunityId} does not exist");
+      return NotFound($"Incident with ID {id} not found.");
     }
-
-    var incident = new Incident
-    {
-      CommunityId = request.CommunityId,
-      Type = request.Type,
-      Severity = request.Severity,
-      Description = request.Description,
-      Status = IncidentStatus.Reported,
-      ReportedBy = "Chathura",
-      CreatedAt = DateTime.UtcNow,
-      UpdatedAt = DateTime.UtcNow
-    };
-    db.Incidents.Add(incident);
-    await db.SaveChangesAsync();
-    return CreatedAtAction("GetIncidentById", "Incident", new { id = incident.Id }, new IncidentListItemDto()
-    {
-      Id = incident.Id,
-      Type = incident.Type.ToString(),
-      Severity = incident.Severity,
-      Status = incident.Status.ToString(),
-      ReportedBy = incident.ReportedBy,
-      CreatedAt = incident.CreatedAt,
-    });
-    return Ok();
+    return Ok(new {incident.Id, IncidentStatus = incident.Status.ToString()});
   }
 
+  [HttpPost("assignment/assign")]
+  public async Task<ActionResult> AssignResource([FromBody] AssignResourceRequestDto request)
+  {
+    var assignment = await incidentService.AssignAsync(request.IncidentId, request.ResourceId);
+    if (assignment is null)
+    {
+      return BadRequest($"Could not assign resource with ID {request.ResourceId} to incident with ID {request.IncidentId}.");
+    }
+    return Ok(assignment);
+  }
+
+  [HttpPost("assignment/release/{resourceId:int}")]
+  public async Task<ActionResult> ReleaseResource(int resourceId)
+  {
+    var assignment = await incidentService.ReleaseAsync(resourceId);
+    if (assignment is null)
+    {
+      return BadRequest($"Could not release resource with ID {resourceId}.");
+    }
+    return Ok(assignment);
+  }
 }
