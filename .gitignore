@@ -1,0 +1,16 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# .NET
+bin/
+obj/
+
+# IDE
+.idea/
+.vs/
+*.user
+
+# OS
+.DS_Store
+Thumbs.db
