@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "n/++zbz3KoY=",
+  "dgSpecHash": "WfR70IZnfcM=",
   "success": true,
-  "projectFilePath": "/Users/jana/Projects/CDU/PRT681_S2026_developers/Chathura_Janadara_S383179/WetSeason/WetSeasonBackend/WetSeasonBackend/WetSeasonBackend.csproj",
+  "projectFilePath": "/Users/jana/Projects/CDU/PRT681_S2026_GROUP_6/developer/Chathura_Janadara_S383179/WetSeason/WetSeasonBackend/WetSeasonBackend/WetSeasonBackend.csproj",
   "expectedPackageFiles": [
     "/Users/jana/.nuget/packages/azure.core/1.50.0/azure.core.1.50.0.nupkg.sha512",
     "/Users/jana/.nuget/packages/azure.identity/1.17.1/azure.identity.1.17.1.nupkg.sha512",

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WetSeasonBackend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f168d605e2e74ef7f497dad2333f7febe07f9d66")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ffb12bc962f9e2c8b43e29943ef260c3cc1f65fe")]
 [assembly: System.Reflection.AssemblyProductAttribute("WetSeasonBackend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WetSeasonBackend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

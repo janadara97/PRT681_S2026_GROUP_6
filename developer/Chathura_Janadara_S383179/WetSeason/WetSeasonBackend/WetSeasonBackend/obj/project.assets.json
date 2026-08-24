@@ -3248,11 +3248,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/jana/Projects/CDU/PRT681_S2026_developers/Chathura_Janadara_S383179/WetSeason/WetSeasonBackend/WetSeasonBackend/WetSeasonBackend.csproj",
+      "projectUniqueName": "/Users/jana/Projects/CDU/PRT681_S2026_GROUP_6/developer/Chathura_Janadara_S383179/WetSeason/WetSeasonBackend/WetSeasonBackend/WetSeasonBackend.csproj",
       "projectName": "WetSeasonBackend",
-      "projectPath": "/Users/jana/Projects/CDU/PRT681_S2026_developers/Chathura_Janadara_S383179/WetSeason/WetSeasonBackend/WetSeasonBackend/WetSeasonBackend.csproj",
+      "projectPath": "/Users/jana/Projects/CDU/PRT681_S2026_GROUP_6/developer/Chathura_Janadara_S383179/WetSeason/WetSeasonBackend/WetSeasonBackend/WetSeasonBackend.csproj",
       "packagesPath": "/Users/jana/.nuget/packages/",
-      "outputPath": "/Users/jana/Projects/CDU/PRT681_S2026_developers/Chathura_Janadara_S383179/WetSeason/WetSeasonBackend/WetSeasonBackend/obj/",
+      "outputPath": "/Users/jana/Projects/CDU/PRT681_S2026_GROUP_6/developer/Chathura_Janadara_S383179/WetSeason/WetSeasonBackend/WetSeasonBackend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/jana/.nuget/NuGet/NuGet.Config"
