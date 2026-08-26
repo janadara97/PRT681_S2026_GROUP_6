@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WetSeasonBackend.Api.Data;
@@ -13,6 +14,7 @@ namespace WetSeasonBackend.Api.Controllers;
 
 public class IncidentController(AppDbContext db, IncidentService incidentService) : ControllerBase
 {
+  [Authorize]
   [HttpGet]
   public async Task<ActionResult<IEnumerable<IncidentListItemDto>>> GetAllIncidents()
   {

@@ -27,3 +27,11 @@ public enum ResourceType
     Crew,
     SatellitePhone
 }
+
+public enum UserRole
+{
+    PublicUser,
+    FieldOfficer,
+    Coordinator,
+    Admin
+}
