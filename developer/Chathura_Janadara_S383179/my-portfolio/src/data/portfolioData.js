@@ -162,7 +162,15 @@ export const featuredProjects = [
             "IIS",
             "OpenLDAP",
         ],
-        githubUrl: "https://github.com/janadara97",
+        githubUrl:
+            "https://github.com/janadara97/PRT681_S2026_GROUP_6/tree/main/developer/Chathura_Janadara_S383179/WetSeason",
+        comingSoon: true,
+        progress: [
+            { label: "Planning & Architecture", done: true },
+            { label: "Backend API (ASP.NET Core + EF Core)", active: true },
+            { label: "Frontend (React)" },
+            { label: "Deployment & Testing" },
+        ],
     },
     {
         title: "NT FireWatch — Geospatial Bushfire Monitoring Platform",
@@ -185,7 +193,8 @@ export const featuredProjects = [
             "AlmaLinux",
             "Azure",
         ],
-        githubUrl: "https://github.com/janadara97",
+        githubUrl: "https://github.com/janadara97/nt-fire-watch",
+        link: "https://www.firewatch.chathura.com.au",
     },
     {
         title: "Underwater Acoustic & Sonar-Based Ship Detection",
@@ -241,10 +250,10 @@ export const experience = [
     {
         company: "Information Systems Associates (ISA)",
         location: "Colombo, Sri Lanka",
-        period: "Aug 2021 – Oct 2024",
+        period: "Aug 2022 – Oct 2024",
         roles: [
             "Senior Software Engineer (Jan 2024 – Oct 2024)",
-            "Software Engineer (Aug 2021 – Dec 2023)",
+            "Software Engineer (Aug 2022 – Dec 2023)",
         ],
         bullets: [
             "Engineered full-stack solutions for the Air Arabia online booking platform — AngularJS frontends and secure Java backend services.",
@@ -256,10 +265,10 @@ export const experience = [
     {
         company: "VizuaMatix (Pvt) Ltd",
         location: "Colombo, Sri Lanka",
-        period: "Jul 2020 – Jul 2021",
+        period: "Jan 2021 – Jul 2022",
         roles: [
-            "Associate Software Engineer (Jan 2021 – Jul 2021)",
-            "Intern Software Engineer (Jul 2020 – Dec 2020)",
+            "Associate Software Engineer (Jan 2022 – Jul 2022)",
+            "Intern Software Engineer (Jul 2021 – Dec 2021)",
         ],
         bullets: [
             "Designed scalable backend REST APIs using Spring Boot and MySQL with clear Swagger documentation.",
