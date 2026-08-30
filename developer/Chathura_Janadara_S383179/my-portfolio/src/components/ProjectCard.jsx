@@ -1,9 +1,10 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { FiArrowUpRight, FiChevronDown, FiClock, FiGithub } from "react-icons/fi";
+import { FiArrowUpRight, FiBarChart2, FiChevronDown, FiClock, FiGithub } from "react-icons/fi";
 
 export default function ProjectCard({ project, index, accent = "#2563EB" }) {
     const [showProgress, setShowProgress] = useState(false);
+    const [showReport, setShowReport] = useState(false);
 
     return (
         <motion.article
@@ -88,6 +89,21 @@ export default function ProjectCard({ project, index, accent = "#2563EB" }) {
                     </motion.button>
                 )}
 
+                {project.powerBiEmbedUrl && (
+                    <motion.button
+                        type="button"
+                        onClick={() => setShowReport((v) => !v)}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
+                        className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition"
+                        style={{ borderColor: `${accent}40`, color: accent, backgroundColor: `${accent}0D` }}
+                    >
+                        <FiBarChart2 size={15} />
+                        View Report
+                        <FiChevronDown size={14} className={`transition-transform ${showReport ? "rotate-180" : ""}`} />
+                    </motion.button>
+                )}
+
                 {project.githubUrl && (
                     <motion.a
                         href={project.githubUrl}
@@ -142,6 +158,30 @@ export default function ProjectCard({ project, index, accent = "#2563EB" }) {
                                     </span>
                                 </div>
                             ))}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {showReport && project.powerBiEmbedUrl && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="overflow-hidden"
+                    >
+                        <div
+                            className="mt-4 w-full overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800"
+                            style={{ aspectRatio: "600 / 373.5" }}
+                        >
+                            <iframe
+                                title={`${project.title} — Power BI Report`}
+                                src={project.powerBiEmbedUrl}
+                                className="h-full w-full border-0"
+                                allowFullScreen
+                            />
                         </div>
                     </motion.div>
                 )}

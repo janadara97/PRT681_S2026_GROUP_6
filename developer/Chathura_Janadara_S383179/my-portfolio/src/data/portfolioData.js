@@ -195,6 +195,8 @@ export const featuredProjects = [
         ],
         githubUrl: "https://github.com/janadara97/nt-fire-watch",
         link: "https://www.firewatch.chathura.com.au",
+        powerBiEmbedUrl:
+            "https://app.powerbi.com/view?r=eyJrIjoiMTE5ODcwZjgtZWMyZC00MDllLWFhOTctMGIzYTZkMjliNTZlIiwidCI6IjlmMjQ4NzY3LThlMWEtNDJmMy04MzZmLWMwOTJhYjk1ZmY3MCJ9",
     },
     {
         title: "Underwater Acoustic & Sonar-Based Ship Detection",
