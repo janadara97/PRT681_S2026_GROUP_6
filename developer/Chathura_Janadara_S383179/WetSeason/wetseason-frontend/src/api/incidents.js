@@ -1,21 +1,9 @@
-const BASE_URL = "http://localhost:5118/api/incident";
+import { apiFetch } from "./client";
 
-export async function fetchIncidents() {
-    const response = await fetch(BASE_URL);
-    if (!response.ok) {
-        throw new Error("Failed to fetch incidents");
-    }
-    return response.json();
+export function fetchIncidents() {
+    return apiFetch("/incident", "GET");
 }
 
-export async function createIncident(incident) {
-    const response = await fetch(BASE_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(incident),
-    });
-    if (!response.ok) {
-        throw new Error("Failed to create incident");
-    }
-    return response.json();
+export function createIncident(incident) {
+    return apiFetch("/incident", "POST", incident);
 }

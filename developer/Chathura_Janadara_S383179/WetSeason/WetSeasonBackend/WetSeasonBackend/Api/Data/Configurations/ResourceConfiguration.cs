@@ -14,6 +14,8 @@ public class ResourceConfiguration : IEntityTypeConfiguration<Resource>
         builder.Property(r => r.HomeDepot)
             .IsRequired()
             .HasMaxLength(120);
+        // Stored as text (e.g. "Boat") rather than an integer - see the
+        // same pattern in IncidentConfiguration.
         builder.Property(r => r.Type)
             .HasConversion<String>()
             .HasMaxLength(30);

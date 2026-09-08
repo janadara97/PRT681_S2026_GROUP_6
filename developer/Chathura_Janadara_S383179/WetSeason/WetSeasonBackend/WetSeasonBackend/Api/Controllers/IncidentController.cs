@@ -14,8 +14,10 @@ namespace WetSeasonBackend.Api.Controllers;
 
 public class IncidentController(AppDbContext db, IncidentService incidentService) : ControllerBase
 {
+  // [Authorize] requires a valid JWT (set up in Program.cs) - unauthenticated
+  // requests get a 401 automatically before this method ever runs.
   [Authorize]
-  [HttpGet]
+  [HttpGet("getAll")]
   public async Task<ActionResult<IEnumerable<IncidentListItemDto>>> GetAllIncidents()
   {
     var incidents = await incidentService.getAllIncidents();
@@ -26,10 +28,12 @@ public class IncidentController(AppDbContext db, IncidentService incidentService
     return Ok(incidents);
   }
 
-  [HttpGet("{id}")]
+  // Route parameter {id} binds straight to the `id` argument below - like
+  // Laravel's Route::get('/{id}') or Spring's @PathVariable.
+  [HttpGet("getById/{id}")]
   public async Task<ActionResult<IEnumerable<Incident>>> GetIncidentById(int id)
   {
-    var incident = await db.Incidents.FirstOrDefaultAsync(i => i.Id == id);
+    var incident = await incidentService.GetIncidentById(id);
     if (incident is null)
     {
       return NotFound($"Incident with ID {id} not found.");
@@ -42,7 +46,9 @@ public class IncidentController(AppDbContext db, IncidentService incidentService
   {
     return Ok(await incidentService.CreateAsync(request));
   }
-  
+
+  // {id:int} adds a route constraint so this only matches numeric ids -
+  // non-numeric values fall through instead of failing model binding.
   [HttpPut("{id:int}/transition")]
   public async Task<ActionResult> Transition(int id)
   {
@@ -51,7 +57,18 @@ public class IncidentController(AppDbContext db, IncidentService incidentService
     {
       return NotFound($"Incident with ID {id} not found.");
     }
-    return Ok(new {incident.Id, IncidentStatus = incident.Status.ToString()});
+    return Ok(new { incident.Id, IncidentStatus = incident.Status.ToString() });
+  }
+
+  [HttpDelete("delete/{id:int}")]
+  public async Task<ActionResult> DeleteIncident(int id)
+  {
+    var isDeleted = await incidentService.DeleteIncident(id);
+    if (!isDeleted)
+    {
+      return NotFound("Error");
+    }
+    return NoContent();
   }
 
   [HttpPost("assignment/assign")]

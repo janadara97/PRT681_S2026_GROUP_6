@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WetSeasonBackend.Api.Data;
 using WetSeasonBackend.Api.Dtos;
@@ -5,8 +7,13 @@ using WetSeasonBackend.Api.Models;
 
 namespace WetSeasonBackend.Api.Services;
 
-public class IncidentService(AppDbContext db) 
+// IncidentService(AppDbContext db) uses a primary constructor (C# 12) -
+// `db` is injected by DI, same as in AuthService.
+public class IncidentService(AppDbContext db)
 {
+    // A switch *expression* (not statement) - each arm returns a value
+    // directly, similar to PHP 8's match or a Java 14+ switch expression.
+    // Encodes the incident's fixed lifecycle as a simple state machine.
     public static IncidentStatus? NextStatus(IncidentStatus currentStatus)
     {
         return currentStatus switch
@@ -22,6 +29,9 @@ public class IncidentService(AppDbContext db)
 
     public async Task<Incident?> TransitionAsync(int incidentId)
     {
+        // FindAsync looks up by primary key, using EF Core's in-memory
+        // tracked cache first before hitting the DB - similar to
+        // Eloquent's find() or a JPA EntityManager.find().
         var incident = await db.Incidents.FindAsync(incidentId);
         if (incident == null)
         {
@@ -34,6 +44,9 @@ public class IncidentService(AppDbContext db)
             return incident;
         }
 
+        // No explicit UPDATE statement needed: EF Core is already tracking
+        // this entity, so mutating the property is enough - the change is
+        // detected and written on SaveChangesAsync().
         incident.Status = nextStatus.Value;
         await db.SaveChangesAsync();
         return incident;
@@ -41,6 +54,10 @@ public class IncidentService(AppDbContext db)
 
     public async Task<List<IncidentListItemDto>> getAllIncidents()
     {
+        // Select(...) projects straight into the DTO shape, so EF Core
+        // generates SQL that only fetches the columns needed (like
+        // Eloquent's ->select() or a JPA projection), instead of loading
+        // full Incident + Community entities and mapping them in C#.
         return await db.Incidents
             .OrderByDescending(i => i.CreatedAt)
             .Select(i => new IncidentListItemDto
@@ -56,7 +73,7 @@ public class IncidentService(AppDbContext db)
             })
             .ToListAsync();
     }
-    
+
     public async Task<IncidentListItemDto?> CreateAsync(CreateIncidentRequestDto request)
     {
         var communityExists = await db.Communities.AnyAsync(c => c.Id == request.CommunityId);
@@ -93,12 +110,12 @@ public class IncidentService(AppDbContext db)
 
     public async Task<ResourceAssignement?> AssignAsync(int incidentId, int resourceId)
     {
-        var incidentExists = await db.Incidents.AnyAsync(i=>i.Id==incidentId);
+        var incidentExists = await db.Incidents.AnyAsync(i => i.Id == incidentId);
         if (!incidentExists)
         {
             return null;
         }
-        var resourceFree = !await db.ResourceAssignements.AnyAsync(r=>r.Id == resourceId && r.ReleasedAt == null);
+        var resourceFree = !await db.ResourceAssignements.AnyAsync(r => r.Id == resourceId && r.ReleasedAt == null);
         if (!resourceFree)
         {
             return null;
@@ -119,7 +136,7 @@ public class IncidentService(AppDbContext db)
     public async Task<ResourceAssignement> ReleaseAsync(int assignmentId)
     {
         var assignment = await db.ResourceAssignements.FindAsync(assignmentId);
-        if(assignment == null || assignment.ReleasedAt != null)
+        if (assignment == null || assignment.ReleasedAt != null)
         {
             return null;
         }
@@ -127,5 +144,40 @@ public class IncidentService(AppDbContext db)
         await db.SaveChangesAsync();
         return assignment;
     }
-  
+
+    public async Task<bool> DeleteIncident(int id)
+    {
+        var incident = await db.Incidents
+            .FirstOrDefaultAsync(i => i.Id == id);
+        if (incident == null)
+        {
+            return false;
+        }
+        db.Incidents.Remove(incident);
+        await db.SaveChangesAsync();
+        return true;
+    }
+
+    public async Task<IncidentListItemDto> GetIncidentById(int id)
+    {
+        var incident = await db.Incidents
+        .FirstAsync(i => i.Id == id);
+        if (incident == null)
+        {
+            return null;
+        }
+        return new IncidentListItemDto
+        {
+
+            Id = incident.Id,
+            Type = incident.Type.ToString(),
+            Severity = incident.Severity,
+            Status = incident.Status.ToString(),
+            CommunityName = incident.Community.Name,
+            Region = incident.Community.Region,
+            ReportedBy = incident.ReportedBy,
+            CreatedAt = incident.CreatedAt,
+        };
+    }
+
 }

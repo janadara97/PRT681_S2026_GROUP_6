@@ -2,6 +2,7 @@ using WetSeasonBackend.Api.Models;
 
 namespace WetSeasonBackend.Api.Dtos;
 
+// Shape of the JSON body expected by POST /api/auth/register.
 public class RegisterRequestDto
 {
     public string Name { get; set; } = string.Empty;

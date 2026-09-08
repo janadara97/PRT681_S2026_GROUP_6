@@ -1,5 +1,8 @@
 namespace WetSeasonBackend.Api.Dtos;
 
+// Flattened view of an Incident for list screens - pulls in the parent
+// Community's Name/Region directly so the frontend doesn't need a
+// separate lookup. Built in IncidentService.getAllIncidents().
 public class IncidentListItemDto
 {
     public int Id { get; set; }

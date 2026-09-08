@@ -3,6 +3,10 @@ using WetSeasonBackend.Api.Dtos;
 
 namespace WetSeasonBackend.Api.Validators;
 
+// FluentValidation rules for CreateIncidentRequestDto - registered in
+// Program.cs and run automatically before CreateIncident() executes.
+// Comparable to a Laravel Form Request's rules() array or Java Bean
+// Validation annotations, but expressed as fluent method chains.
 public class CreateIncidentRequestValidator : AbstractValidator<CreateIncidentRequestDto>
 {
     public CreateIncidentRequestValidator()
@@ -19,6 +23,6 @@ public class CreateIncidentRequestValidator : AbstractValidator<CreateIncidentRe
 
         RuleFor(x => x.Type)
             .IsInEnum().WithMessage("Unknown incident type.");
-        
-    }   
+
+    }
 }

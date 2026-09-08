@@ -10,7 +10,12 @@ public class Incident
     public string ReportedBy { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+    // Foreign key + navigation property pair: CommunityId is the actual DB
+    // column, Community is the loaded related row (like a Laravel
+    // belongsTo() or JPA @ManyToOne). EF Core matches them by name/convention.
     public int CommunityId { get; set; }
     public Community Community { get; set; } = null!;
+
     public ICollection<ResourceAssignement> ResourceAssignements { get; set; } = new List<ResourceAssignement>();
 }

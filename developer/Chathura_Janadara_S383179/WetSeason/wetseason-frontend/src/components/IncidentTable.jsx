@@ -35,6 +35,7 @@ function IncidentTable({ incidents }) {
                                     {incident.status}
                                 </span>
                             </td>
+                            <td></td>
                         </tr>
                     ))}
                 </tbody>

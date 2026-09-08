@@ -22,7 +22,7 @@ function ReportIncident() {
                 severity,
                 description,
             });
-            navigate("/");
+            navigate("/incidents");
         } catch {
             setError("Failed to report incident. Please try again.");
         } finally {
@@ -32,7 +32,10 @@ function ReportIncident() {
 
     return (
         <div className="min-h-screen bg-gray-50 p-8">
-            <Link to="/" className="text-blue-600 hover:underline text-sm">
+            <Link
+                to="/incidents"
+                className="text-blue-600 hover:underline text-sm"
+            >
                 &larr; Back to Incidents
             </Link>
             <h1 className="text-3xl font-bold text-gray-900 mt-2 mb-6">
