@@ -44,7 +44,12 @@ public class IncidentController(AppDbContext db, IncidentService incidentService
   [HttpPost]
   public async Task<ActionResult<IncidentListItemDto>> CreateIncident(CreateIncidentRequestDto request)
   {
-    return Ok(await incidentService.CreateAsync(request));
+    var incident = await incidentService.CreateAsync(request);
+    if (incident is null)
+    {
+      return NotFound($"Community with ID {request.CommunityId} not found.");
+    }
+    return Ok(incident);
   }
 
   // {id:int} adds a route constraint so this only matches numeric ids -

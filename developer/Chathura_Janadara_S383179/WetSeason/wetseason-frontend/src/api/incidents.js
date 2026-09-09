@@ -1,7 +1,7 @@
 import { apiFetch } from "./client";
 
 export function fetchIncidents() {
-    return apiFetch("/incident", "GET");
+    return apiFetch("/incident/getAll", "GET");
 }
 
 export function createIncident(incident) {
