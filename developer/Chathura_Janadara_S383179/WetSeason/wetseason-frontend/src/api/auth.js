@@ -6,3 +6,13 @@ export function login(username, password) {
         password: password,
     });
 }
+
+export function register({ name, username, email, password, role }) {
+    return apiFetch("/auth/register", "POST", {
+        name: name,
+        username: username,
+        email: email,
+        password: password,
+        role: role,
+    });
+}
