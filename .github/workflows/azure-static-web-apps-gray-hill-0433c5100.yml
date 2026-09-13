@@ -4,10 +4,15 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "developer/Chathura_Janadara_S383179/WetSeason/wetseason-frontend/**"
+      - ".github/workflows/azure-static-web-apps-gray-hill-0433c5100.yml"
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
+    paths:
+      - "developer/Chathura_Janadara_S383179/WetSeason/wetseason-frontend/**"
 
 jobs:
   build_and_deploy_job:
