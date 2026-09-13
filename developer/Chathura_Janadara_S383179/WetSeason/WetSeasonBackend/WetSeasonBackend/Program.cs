@@ -47,7 +47,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(frontendCorsPolicy, policy =>
     {
-        policy.WithOrigins("http://localhost:5173", "http://localhost:5174")
+        policy.WithOrigins(
+                "http://localhost:5173",
+                "http://localhost:5174",
+                "https://gray-hill-0433c5100.6.azurestaticapps.net")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
