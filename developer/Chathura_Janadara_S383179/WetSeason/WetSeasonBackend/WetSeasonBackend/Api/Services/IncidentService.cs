@@ -74,7 +74,7 @@ public class IncidentService(AppDbContext db)
             .ToListAsync();
     }
 
-    public async Task<IncidentListItemDto?> CreateAsync(CreateIncidentRequestDto request)
+    public async Task<IncidentListItemDto?> CreateAsync(CreateIncidentRequestDto request, string reportedBy)
     {
         var communityExists = await db.Communities.AnyAsync(c => c.Id == request.CommunityId);
         if (!communityExists)
@@ -89,7 +89,7 @@ public class IncidentService(AppDbContext db)
             Severity = request.Severity,
             Description = request.Description,
             Status = IncidentStatus.Reported,
-            ReportedBy = "Chathura",
+            ReportedBy = reportedBy,
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow
         };
@@ -106,6 +106,45 @@ public class IncidentService(AppDbContext db)
             CreatedAt = incident.CreatedAt
 
         };
+    }
+
+    public async Task<IncidentListItemDto?> UpdateAsync(int id, CreateIncidentRequestDto request)
+    {
+        var incident = await db.Incidents.FindAsync(id);
+        if (incident == null)
+        {
+            return null;
+        }
+        var communityExists = await db.Communities.AnyAsync(c => c.Id == request.CommunityId);
+        if (!communityExists)
+        {
+            return null;
+        }
+        incident.CommunityId = request.CommunityId;
+        incident.Type = request.Type;
+        incident.Severity = request.Severity;
+        incident.Description = request.Description;
+        incident.UpdatedAt = DateTime.UtcNow;
+        await db.SaveChangesAsync();
+
+        // Re-query through the same Select() projection getAllIncidents()
+        // uses, rather than reading incident.Community directly - that
+        // navigation property isn't loaded here (no .Include()), so
+        // accessing it without going back through the DB would throw.
+        return await db.Incidents
+            .Where(i => i.Id == id)
+            .Select(i => new IncidentListItemDto
+            {
+                Id = i.Id,
+                Type = i.Type.ToString(),
+                Severity = i.Severity,
+                Status = i.Status.ToString(),
+                CommunityName = i.Community.Name,
+                Region = i.Community.Region,
+                ReportedBy = i.ReportedBy,
+                CreatedAt = i.CreatedAt,
+            })
+            .FirstAsync();
     }
 
     public async Task<ResourceAssignement?> AssignAsync(int incidentId, int resourceId)

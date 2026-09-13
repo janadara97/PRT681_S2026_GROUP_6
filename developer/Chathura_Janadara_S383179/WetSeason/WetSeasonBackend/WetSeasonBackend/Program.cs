@@ -38,6 +38,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 // binding) - safe for services that depend on a DbContext.
 builder.Services.AddScoped<IncidentService>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<CommunityService>();
 
 // CORS: without this, the browser blocks the React dev server (different
 // port) from calling this API.
@@ -46,7 +47,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(frontendCorsPolicy, policy =>
     {
-        policy.WithOrigins("http://localhost:5173", "http://localhost:5176")
+        policy.WithOrigins("http://localhost:5173", "http://localhost:5174")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -75,6 +76,19 @@ builder.Services.AddAuthorization(); // enables the [Authorize] attribute
 // Finalizes the DI container. Everything after this configures the
 // request pipeline instead of registering services.
 var app = builder.Build();
+
+// Applies any pending EF Core migrations to whatever database the
+// connection string points to, every time the app starts. This runs
+// as an Azure resource (inside the App Service container), so it's
+// covered by "Allow Azure services and resources to access this
+// server" on Azure SQL's firewall - no extra network rule needed.
+// Migrate() is a no-op if there's nothing pending, so this is safe
+// to run on every restart, not just the first one.
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
 
 // Middleware pipeline: each request passes through these in order,
 // like Laravel's middleware stack or a chain of Servlet filters.
