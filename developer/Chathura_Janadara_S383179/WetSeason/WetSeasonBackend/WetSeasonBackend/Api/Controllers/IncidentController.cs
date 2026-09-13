@@ -12,11 +12,10 @@ namespace WetSeasonBackend.Api.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 
-public class IncidentController(AppDbContext db, IncidentService incidentService) : ControllerBase
+public class IncidentController(AppDbContext db, IncidentService incidentService, CommunityService communityService) : ControllerBase
 {
   // [Authorize] requires a valid JWT (set up in Program.cs) - unauthenticated
   // requests get a 401 automatically before this method ever runs.
-  [Authorize]
   [HttpGet("getAll")]
   public async Task<ActionResult<IEnumerable<IncidentListItemDto>>> GetAllIncidents()
   {
@@ -26,6 +25,17 @@ public class IncidentController(AppDbContext db, IncidentService incidentService
       return NotFound("Database context is not available.");
     }
     return Ok(incidents);
+  }
+
+  // IncidentType is a fixed C# enum, not a DB table, so there's no
+  // service/DB call here - just the enum's member names as strings
+  // (e.g. "CycloneDamage"), the same casing CreateIncidentRequestDto
+  // expects when creating an incident.
+  [HttpGet("types")]
+  public ActionResult<IEnumerable<string>> GetAllIncidentTypes()
+  {
+    var types = Enum.GetNames(typeof(IncidentType));
+    return Ok(types);
   }
 
   // Route parameter {id} binds straight to the `id` argument below - like
@@ -41,10 +51,14 @@ public class IncidentController(AppDbContext db, IncidentService incidentService
     return Ok(incident);
   }
 
+  // [Authorize] is required here so User.Identity is actually populated -
+  // without it, an anonymous request would have no username to read.
+  [Authorize]
   [HttpPost]
   public async Task<ActionResult<IncidentListItemDto>> CreateIncident(CreateIncidentRequestDto request)
   {
-    var incident = await incidentService.CreateAsync(request);
+    var reportedBy = User.Identity?.Name ?? "Unknown";
+    var incident = await incidentService.CreateAsync(request, reportedBy);
     if (incident is null)
     {
       return NotFound($"Community with ID {request.CommunityId} not found.");
@@ -96,5 +110,16 @@ public class IncidentController(AppDbContext db, IncidentService incidentService
       return BadRequest($"Could not release resource with ID {resourceId}.");
     }
     return Ok(assignment);
+  }
+
+  [HttpPut("{id:int}")]
+  public async Task<ActionResult> Update(int id, CreateIncidentRequestDto request)
+  {
+    var incident = await incidentService.UpdateAsync(id, request);
+    if (incident is null)
+    {
+      return NotFound($"Incident with ID {id} not found.");
+    }
+    return Ok(incident);
   }
 }

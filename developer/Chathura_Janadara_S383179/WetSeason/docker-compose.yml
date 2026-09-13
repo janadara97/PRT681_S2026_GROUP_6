@@ -1,0 +1,66 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "${DB_PASSWORD:-P@ssw0rd123!}"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    healthcheck:
+      # sqlcmd lives at this path in the mssql-tools18 package bundled
+      # with the 2022 image; -C trusts the server's self-signed cert.
+      test:
+        [
+          "CMD-SHELL",
+          '/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -C -Q ''SELECT 1'' || exit 1',
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  backend:
+    build:
+      context: ./WetSeasonBackend/WetSeasonBackend
+      target: build # <--- Tells Docker to stop at Stage 1 (keeps the SDK)
+
+    # Override the default startup command to use the live-reloader
+    command: dotnet watch run --no-launch-profile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      # Double-underscore is ASP.NET Core's convention for env vars that
+      # override nested appsettings.json keys - this sets
+      # ConnectionStrings:Default, same as Laravel's DB_* .env vars
+      # overriding config/database.php.
+      ConnectionStrings__Default: "Server=sqlserver,1433;Database=WetSeasonDb;User Id=sa;Password=${DB_PASSWORD:-P@ssw0rd123!};TrustServerCertificate=True"
+      Jwt__Key: "${JWT_KEY:-O30F07pjBXTLfwcMVOj2V00F28+vfYoA1A5WWCazmKY=}"
+      Jwt__Issuer: "WetSeasonApi"
+    ports:
+      - "5118:8080"
+    develop:
+      watch:
+        # Sync all C# files from your laptop into the container's /src folder
+        - action: sync
+          path: ./WetSeasonBackend/WetSeasonBackend
+          target: /src
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./wetseason-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    develop:
+      watch:
+        - action: sync
+          path: ./wetseason-frontend/src # What folder to watch on your laptop
+          target: /app/src
+
+volumes:
+  sqlserver-data:
