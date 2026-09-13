@@ -1,0 +1,31 @@
+name: Build and Push WetSeason Backend
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "developer/Chathura_Janadara_S383179/WetSeason/WetSeasonBackend/**"
+  workflow_dispatch: {} # lets you manually trigger a run from the Actions tab
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to Azure Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.ACR_LOGIN_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      # ubuntu-latest runners are amd64 natively, so this builds the
+      # correct architecture for Azure App Service without needing the
+      # --platform flag we had to use manually on Apple Silicon.
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: developer/Chathura_Janadara_S383179/WetSeason/WetSeasonBackend/WetSeasonBackend
+          push: true
+          tags: ${{ secrets.ACR_LOGIN_SERVER }}/wetseason-backend:latest

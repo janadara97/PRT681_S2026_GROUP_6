@@ -41,16 +41,18 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<CommunityService>();
 
 // CORS: without this, the browser blocks the React dev server (different
-// port) from calling this API.
+// port) from calling this API. Origins come from config (a comma-separated
+// list) instead of being hardcoded, so adding a new frontend URL (e.g. a
+// custom domain) is just an App Setting change + restart, not a rebuild.
 const string frontendCorsPolicy = "FrontendCorsPolicy";
+var allowedOrigins = builder.Configuration["Cors:AllowedOrigins"]?
+    .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+    ?? [];
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(frontendCorsPolicy, policy =>
     {
-        policy.WithOrigins(
-                "http://localhost:5173",
-                "http://localhost:5174",
-                "https://gray-hill-0433c5100.6.azurestaticapps.net")
+        policy.WithOrigins(allowedOrigins)
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
