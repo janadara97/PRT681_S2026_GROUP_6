@@ -12,6 +12,12 @@ using WetSeasonBackend.Api.Validators;
 // Laravel's bootstrap/app.php + routes combined). Runs once at startup.
 var builder = WebApplication.CreateBuilder(args);
 
+// Adds log4net as a *provider* underneath ASP.NET Core's own logging
+// abstraction - existing ILogger<T> calls throughout the app now also
+// flow through log4net.config's appenders (a rolling file), rather than
+// replacing the built-in logging system entirely.
+builder.Logging.AddLog4Net("log4net.config");
+
 // builder.Services is the DI container (like Spring's ApplicationContext
 // or Laravel's service container) - things registered here can be
 // injected into controller constructors instead of being "new"-ed up.
