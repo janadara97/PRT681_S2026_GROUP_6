@@ -112,6 +112,9 @@ public class IncidentController(AppDbContext db, IncidentService incidentService
     return Ok(assignment);
   }
 
+  // [Authorize] is required so AuthService.GetCurrentUserDetails() has an
+  // actual signed-in user to read claims from.
+  [Authorize]
   [HttpPut("{id:int}")]
   public async Task<ActionResult> Update(int id, CreateIncidentRequestDto request)
   {

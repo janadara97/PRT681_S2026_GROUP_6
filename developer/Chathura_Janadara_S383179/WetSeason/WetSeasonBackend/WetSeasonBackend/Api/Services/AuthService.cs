@@ -9,11 +9,15 @@ using WetSeasonBackend.Api.Models;
 
 namespace WetSeasonBackend.Api.Services;
 
+// A small read-only holder for the two claims other services need most
+// often - see GetCurrentUserDetails() below.
+public record CurrentUserDetails(string? Email, string? Name);
+
 // AuthService(AppDbContext db) is a "primary constructor" (C# 12) - it's
 // shorthand for a normal constructor that just assigns `db` to a private
 // field. `db` is injected by the DI container, the same way Laravel or
 // Spring would inject a dependency via a constructor.
-public class AuthService(AppDbContext db)
+public class AuthService(AppDbContext db, IHttpContextAccessor httpContextAccessor)
 {
     // ASP.NET Identity's password hasher - handles salting/hashing so raw
     // passwords are never stored. Comparable to Laravel's Hash::make().
@@ -81,5 +85,16 @@ public class AuthService(AppDbContext db)
         db.Users.Add(user);
         await db.SaveChangesAsync();
         return user;
+    }
+
+    // Reads the email/name straight off the current request's JWT claims -
+    // both were already put there at login (see the Claims array above),
+    // so this needs no database call.
+    public CurrentUserDetails GetCurrentUserDetails()
+    {
+        var user = httpContextAccessor.HttpContext?.User;
+        var email = user?.FindFirst(ClaimTypes.Email)?.Value;
+        var name = user?.FindFirst(ClaimTypes.Name)?.Value;
+        return new CurrentUserDetails(email, name);
     }
 }

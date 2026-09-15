@@ -39,6 +39,9 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 builder.Services.AddScoped<IncidentService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<CommunityService>();
+builder.Services.AddTransient<IEmailService, EmailService>();
+
+builder.Services.AddHttpContextAccessor();
 
 // CORS: without this, the browser blocks the React dev server (different
 // port) from calling this API. Origins come from config (a comma-separated

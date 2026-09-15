@@ -9,7 +9,7 @@ namespace WetSeasonBackend.Api.Services;
 
 // IncidentService(AppDbContext db) uses a primary constructor (C# 12) -
 // `db` is injected by DI, same as in AuthService.
-public class IncidentService(AppDbContext db)
+public class IncidentService(AppDbContext db, IEmailService emailService, AuthService authService)
 {
     // A switch *expression* (not statement) - each arm returns a value
     // directly, similar to PHP 8's match or a Java 14+ switch expression.
@@ -126,6 +126,14 @@ public class IncidentService(AppDbContext db)
         incident.Description = request.Description;
         incident.UpdatedAt = DateTime.UtcNow;
         await db.SaveChangesAsync();
+        
+        var currentUser = authService.GetCurrentUserDetails();
+        if (!string.IsNullOrEmpty(currentUser.Email))
+        {
+            var (subject, body) = EmailTemplates.IncidentUpdated(currentUser.Name, id);
+            await emailService.SendEmailAsync(currentUser.Email, subject, body);
+        }
+
 
         // Re-query through the same Select() projection getAllIncidents()
         // uses, rather than reading incident.Community directly - that
