@@ -69,6 +69,7 @@ public class IncidentService(AppDbContext db, IEmailService emailService, AuthSe
                 CommunityName = i.Community.Name,
                 Region = i.Community.Region,
                 ReportedBy = i.ReportedBy,
+                Description = i.Description,
                 CreatedAt = i.CreatedAt,
             })
             .ToListAsync();
@@ -103,6 +104,7 @@ public class IncidentService(AppDbContext db, IEmailService emailService, AuthSe
             Severity = incident.Severity,
             Status = incident.Status.ToString(),
             ReportedBy = incident.ReportedBy,
+            Description = incident.Description,
             CreatedAt = incident.CreatedAt
 
         };
@@ -162,6 +164,7 @@ public class IncidentService(AppDbContext db, IEmailService emailService, AuthSe
                 CommunityName = i.Community.Name,
                 Region = i.Community.Region,
                 ReportedBy = i.ReportedBy,
+                Description = i.Description,
                 CreatedAt = i.CreatedAt,
             })
             .FirstAsync();

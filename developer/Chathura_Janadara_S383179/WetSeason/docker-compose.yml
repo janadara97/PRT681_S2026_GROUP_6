@@ -37,7 +37,7 @@ services:
       ConnectionStrings__Default: "Server=sqlserver,1433;Database=WetSeasonDb;User Id=sa;Password=${DB_PASSWORD:-P@ssw0rd123!};TrustServerCertificate=True"
       Jwt__Key: "${JWT_KEY:-O30F07pjBXTLfwcMVOj2V00F28+vfYoA1A5WWCazmKY=}"
       Jwt__Issuer: "WetSeasonApi"
-      Cors__AllowedOrigins: "http://localhost:5173,http://localhost:5174"
+      Cors__AllowedOrigins: "http://localhost:5173,http://localhost:5174,http://localhost:3000"
     ports:
       - "5118:8080"
     develop:

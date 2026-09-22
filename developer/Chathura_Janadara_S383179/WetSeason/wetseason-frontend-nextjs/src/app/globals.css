@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* Same design tokens as the Vite app's src/index.css, so ported
+   components (Header, StatCards, etc.) look identical here. */
+@theme {
+  --color-canvas: #f4f5f2;
+  --color-ink: #16202b;
+  --color-ink-soft: #3d4b5a;
+  --color-ink-muted: #5d6b7a;
+
+  --color-amber-50: #fdf6e8;
+  --color-amber-100: #fdf0d8;
+  --color-amber-300: #ffc94d;
+  --color-amber-400: #f0b429;
+  --color-amber-600: #c98f14;
+  --color-amber-700: #a86a05;
+  --color-amber-800: #8a5804;
+  --color-amber-900: #2a1c00;
+
+  --color-teal-50: #eef5f4;
+  --color-teal-100: #e8f4f2;
+  --color-teal-200: #e2f0ee;
+  --color-teal-600: #0f6f66;
+  --color-teal-800: #0b5a52;
+
+  --color-danger-50: #fbeceb;
+  --color-danger-600: #8c2f1f;
+  --color-danger-700: #73281a;
+
+  --color-hairline: rgba(22, 32, 43, .1);
+
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+@layer components {
+  .label-caps {
+    @apply font-mono text-[10px] uppercase tracking-[.12em] text-ink-muted;
+  }
+  .field {
+    @apply w-full rounded-md border border-ink/20 bg-white px-3 py-2.5 text-[13px] text-ink outline-none focus:border-amber-600;
+  }
+  .btn-primary {
+    @apply rounded-md border border-amber-600 bg-amber-400 px-4 py-2.5 text-[13px] font-semibold text-amber-900 hover:bg-amber-300;
+  }
+  .btn-secondary {
+    @apply rounded-md border border-ink/20 bg-white px-4 py-2.5 text-[13px] font-medium text-ink hover:bg-canvas;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}

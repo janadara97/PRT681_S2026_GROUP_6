@@ -12,5 +12,6 @@ public class IncidentListItemDto
     public string CommunityName { get; set; } = string.Empty;
     public string Region { get; set; } = string.Empty;
     public string ReportedBy { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; }
 }
