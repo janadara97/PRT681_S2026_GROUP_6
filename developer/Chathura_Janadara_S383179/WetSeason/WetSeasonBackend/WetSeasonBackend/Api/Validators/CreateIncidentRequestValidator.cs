@@ -3,10 +3,8 @@ using WetSeasonBackend.Api.Dtos;
 
 namespace WetSeasonBackend.Api.Validators;
 
-// FluentValidation rules for CreateIncidentRequestDto - registered in
-// Program.cs and run automatically before CreateIncident() executes.
-// Comparable to a Laravel Form Request's rules() array or Java Bean
-// Validation annotations, but expressed as fluent method chains.
+// FluentValidation rules for CreateIncidentRequestDto, run automatically
+// before CreateIncident() - like a Laravel Form Request or Java Bean Validation.
 public class CreateIncidentRequestValidator : AbstractValidator<CreateIncidentRequestDto>
 {
     public CreateIncidentRequestValidator()

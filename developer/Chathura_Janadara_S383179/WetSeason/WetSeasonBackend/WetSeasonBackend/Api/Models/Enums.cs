@@ -1,8 +1,7 @@
 namespace WetSeasonBackend.Api.Models;
 
-// C# enums store as integers by default, but EF Core config converts these
-// to strings in the DB (see e.g. IncidentConfiguration) and Program.cs
-// converts them to strings in JSON - so the API and DB stay readable.
+// Enums store as integers by default, but EF Core (see IncidentConfiguration)
+// and Program.cs's JSON converter both render them as strings for readability.
 
 public enum IncidentStatus
 {

@@ -25,7 +25,6 @@ familiarity.
 Whenever generating or changing code in this repo, always explain what the change does and why —
 the reasoning behind the approach, not just the diff itself. Don't wait to be asked; include this
 by default alongside every code change, not only when something looks unfamiliar.
-familiarity.
 
 ## Repository structure
 
@@ -58,7 +57,8 @@ Three independent projects, run together locally via one Docker Compose file:
 - FluentValidation validators (`Api/Validators`) run automatically via `AddFluentValidationAutoValidation()` — no manual `.Validate()` calls in controllers.
 - JWT claims are set in `AuthService.Login` using the long-form `ClaimTypes.Name` / `.Email` / `.Role` constants — these serialize into the token as full URIs (e.g. `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name`), not short names. Anything reading claims back (`AuthService.GetCurrentUserDetails`, or the Next.js app's `src/lib/jwt.js`) has to use the same long form.
 - CORS origins are config-driven (`Cors:AllowedOrigins`, comma-separated), read once at startup — not hardcoded. In Docker Compose, the env var `Cors__AllowedOrigins` **overrides** `appsettings.Development.json`'s value (ASP.NET Core config precedence), so editing the JSON file alone has no effect there; both need updating together, and the container needs recreating for the change to take effect.
-- log4net is wired in as a provider *underneath* `Microsoft.Extensions.Logging` (`builder.Logging.AddLog4Net(...)`), not a replacement — existing `ILogger<T>` injection is unaffected.
+- Logging is Serilog (`Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(...)`, `builder.Host.UseSerilog()`), replacing the ASP.NET Core default logger entirely — not log4net, which was fully removed. Sinks/levels are config-driven, under `appsettings.json`'s `"Serilog"` section (same pattern as CORS/JWT/Email), currently `Console` and `Seq` (self-hosted via Docker Compose, `http://localhost:5341`). Always use structured templates (`logger.LogInformation("Incident {IncidentId} updated", id)`), never string interpolation (`$"Incident {id} updated"`) — interpolation flattens the value before Serilog ever sees it, defeating the point of structured logging (this already had to be fixed once in `IncidentController.cs`).
+- The `backend` Docker Compose service needs its own `Serilog__WriteTo__1__Args__serverUrl` override (`http://seq:5341`) since `localhost` means something different inside that container than on the host — same class of issue as the `ConnectionStrings__Default`/CORS split below.
 - MailKit sends email from `IncidentService` on incident updates; templates are in `EmailTemplates.cs`.
 
 ### Vite frontend — the deployed app
@@ -95,3 +95,13 @@ cache, and occasionally a leftover root-owned `next dev` process still listening
 Diagnose with `ps aux | grep next` / `stat -f "%Su" <path>`; the fix is always to have the **user**
 run `sudo chown -R $(whoami) <path>` or `sudo rm -rf <path>` themselves in their own terminal — it
 needs their password, so this isn't something Claude can run directly.
+
+`docker-compose.yml`'s `backend` service defines `develop: watch:` for live-syncing source into the
+running container, but that only activates via `docker compose watch` (or `up --watch`) - a plain
+`docker compose up -d` (even with `--force-recreate`) does **not** sync source changes at all, so
+`dotnet watch run` inside the container keeps running whatever was baked in at the last image build.
+Editing a `.cs` file and recreating the container is *not* enough to pick it up - after any backend
+code change, run `docker compose up -d --build backend` (note `--build`) to actually rebuild the
+image, or the container silently keeps running stale code with no error. This already caused one full
+debugging session chasing a phantom bug (Exceptionless's automatic exception capture "not working")
+that turned out to just be a stale container.

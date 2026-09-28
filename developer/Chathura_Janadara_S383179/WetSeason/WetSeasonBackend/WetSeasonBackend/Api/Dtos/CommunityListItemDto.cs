@@ -1,8 +1,7 @@
 namespace WetSeasonBackend.Api.Dtos;
 
-// Flattened view of a Community for list/dropdown screens - just the
-// scalar fields, not the Incidents navigation collection (which would
-// otherwise pull in every incident for every community on the page).
+// Flattened view of a Community for list/dropdown screens - scalar fields
+// only, not the Incidents collection (which would pull in every incident).
 public class CommunityListItemDto
 {
     public int Id { get; set; }

@@ -5,39 +5,56 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using WetSeasonBackend.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
+using Exceptionless;
 using WetSeasonBackend.Api.Services;
 using WetSeasonBackend.Api.Validators;
+using Temporalio.Extensions.Hosting;
+using WetSeasonBackend.Api.Workflows;
 
-// Single entry point for the API (like Spring's Application.java or
-// Laravel's bootstrap/app.php + routes combined). Runs once at startup.
+
+// Entry point - like Spring's Application.java or Laravel's bootstrap/app.php.
 var builder = WebApplication.CreateBuilder(args);
 
-// Adds log4net as a *provider* underneath ASP.NET Core's own logging
-// abstraction - existing ILogger<T> calls throughout the app now also
-// flow through log4net.config's appenders (a rolling file), rather than
-// replacing the built-in logging system entirely.
-builder.Logging.AddLog4Net("log4net.config");
+// Serilog replaces the default logger; ReadFrom.Configuration reads the
+// "Serilog" section of appsettings.json, same pattern as CORS/JWT/Email below.
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
+builder.Host.UseSerilog();
 
-// builder.Services is the DI container (like Spring's ApplicationContext
-// or Laravel's service container) - things registered here can be
-// injected into controller constructors instead of being "new"-ed up.
+var exceptionlessApiKey = builder.Configuration["Exceptionless:ApiKey"];
+var exceptionlessServerUrl = builder.Configuration["Exceptionless:ServerUrl"];
+
+if (string.IsNullOrEmpty(exceptionlessServerUrl)) 
+{
+    exceptionlessServerUrl = "http://localhost:7110"; // Default Exceptionless server URL
+}
+
+builder.AddExceptionless(options =>
+{
+    options.ApiKey = exceptionlessApiKey;
+    options.ServerUrl = exceptionlessServerUrl;
+});
+builder.Services.AddProblemDetails();
+
+// builder.Services is the DI container (Spring's ApplicationContext /
+// Laravel's service container) - registered here, injected into controllers.
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
-        // Serialize enums as their name ("Responding") instead of a number,
-        // similar to a Laravel enum cast or Jackson's @JsonValue.
+        // Serialize enums as names ("Responding") not numbers - like a Laravel enum cast.
         options.JsonSerializerOptions.Converters.Add(
             new System.Text.Json.Serialization.JsonStringEnumConverter());
     });
 
-// FluentValidation = this project's validation library, comparable to
-// Laravel Form Requests or Java Bean Validation. AutoValidation runs
-// validators automatically before an action executes.
+
+// FluentValidation - comparable to Laravel Form Requests or Java Bean Validation.
+// AutoValidation runs validators automatically before the action executes.
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateIncidentRequestValidator>();
 
-// Registers the EF Core DbContext (a unit-of-work, similar to a JPA
-// EntityManager) pointed at the "Default" connection string.
+// Registers the EF Core DbContext (like a JPA EntityManager) - "Default" connection string.
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
 // AddScoped = one instance per HTTP request (Laravel's default "scoped"
@@ -49,10 +66,8 @@ builder.Services.AddTransient<IEmailService, EmailService>();
 
 builder.Services.AddHttpContextAccessor();
 
-// CORS: without this, the browser blocks the React dev server (different
-// port) from calling this API. Origins come from config (a comma-separated
-// list) instead of being hardcoded, so adding a new frontend URL (e.g. a
-// custom domain) is just an App Setting change + restart, not a rebuild.
+// CORS: without this the browser blocks cross-port frontend calls. Origins
+// come from config, not hardcoded, so a new URL is just a setting change.
 const string frontendCorsPolicy = "FrontendCorsPolicy";
 var allowedOrigins = builder.Configuration["Cors:AllowedOrigins"]?
     .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
@@ -67,8 +82,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-// JWT auth setup, same idea as Laravel Sanctum or Spring Security's JWT
-// filter - validates the "Authorization: Bearer <token>" header.
+// JWT auth setup - same idea as Laravel Sanctum or Spring Security's JWT filter.
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -85,27 +99,36 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+// The client: used later (step 6) to tell Temporal "start this workflow".
+builder.Services.AddTemporalClient(
+    clientTargetHost: builder.Configuration["Temporal:Address"],
+    clientNamespace: "default");
+
+// The worker: a background service, living inside this same app, that polls
+// Temporal for work on "wetseason-incidents" and actually runs the workflow/
+// activity code above. Without this, StartWorkflowAsync (IncidentService)
+// would schedule work that nothing ever picks up.
+var temporalWorker = builder.Services.AddHostedTemporalWorker(taskQueue: "wetseason-incidents");
+temporalWorker.AddScopedActivities<EmailActivities>();
+temporalWorker.AddWorkflow<IncidentUpdatedWorkflow>();
+
 builder.Services.AddAuthorization(); // enables the [Authorize] attribute
 
-// Finalizes the DI container. Everything after this configures the
-// request pipeline instead of registering services.
+// Finalizes DI; everything after this configures the request pipeline.
 var app = builder.Build();
 
-// Applies any pending EF Core migrations to whatever database the
-// connection string points to, every time the app starts. This runs
-// as an Azure resource (inside the App Service container), so it's
-// covered by "Allow Azure services and resources to access this
-// server" on Azure SQL's firewall - no extra network rule needed.
-// Migrate() is a no-op if there's nothing pending, so this is safe
-// to run on every restart, not just the first one.
+
+
+// Applies pending EF Core migrations on every startup - a no-op if none are
+// pending, so safe to run on every restart, not just the first.
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
 }
-
-// Middleware pipeline: each request passes through these in order,
-// like Laravel's middleware stack or a chain of Servlet filters.
+app.UseExceptionHandler();
+app.UseExceptionless();
+// Middleware pipeline - like Laravel's middleware stack or a chain of Servlet filters.
 app.UseCors(frontendCorsPolicy);
 
 app.UseAuthentication(); // who is calling? (reads the JWT)

@@ -8,6 +8,20 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 COPY . .
+
+# npm run build (below) runs `vite build`, whose default mode is
+# "production" - that automatically loads .env.production, which hardcodes
+# the real Azure backend URL for the actual Azure Static Web Apps deploy
+# (which builds straight from source, not through this Dockerfile, so it's
+# unaffected by anything here). But Vite gives an *actual* environment
+# variable priority over .env file values, so declaring VITE_API_ROOT here
+# overrides it just for this Docker build - defaulting to the local backend's
+# host-mapped port, since docker-compose runs this same Dockerfile for local
+# testing. ARG makes it a build-time value (not baked in until `npm run
+# build` runs); ENV is what actually exposes it to that command.
+ARG VITE_API_ROOT=http://localhost:5118/api
+ENV VITE_API_ROOT=$VITE_API_ROOT
+
 RUN npm run build
 
 # Stage 2: serve the static dist/ output with nginx. React Router does

@@ -13,11 +13,9 @@ namespace WetSeasonBackend.Api.Services;
 // often - see GetCurrentUserDetails() below.
 public record CurrentUserDetails(string? Email, string? Name);
 
-// AuthService(AppDbContext db) is a "primary constructor" (C# 12) - it's
-// shorthand for a normal constructor that just assigns `db` to a private
-// field. `db` is injected by the DI container, the same way Laravel or
-// Spring would inject a dependency via a constructor.
-public class AuthService(AppDbContext db, IHttpContextAccessor httpContextAccessor)
+// Primary constructor (C# 12) - shorthand assigning `db` to a private field,
+// injected by DI the same way Laravel or Spring inject a dependency.
+public class AuthService(AppDbContext db, IHttpContextAccessor httpContextAccessor, ILogger<AuthService> logger)
 {
     // ASP.NET Identity's password hasher - handles salting/hashing so raw
     // passwords are never stored. Comparable to Laravel's Hash::make().
@@ -28,18 +26,19 @@ public class AuthService(AppDbContext db, IHttpContextAccessor httpContextAccess
         var user = db.Users.SingleOrDefault(u => u.Username == username);
         if (user == null)
         {
+            logger.LogWarning("User not found: {Username}", username);
             return null;
         }
 
         var result = hasher.VerifyHashedPassword(user, user.PasswordHash, password);
         if (result == PasswordVerificationResult.Failed)
         {
+            logger.LogWarning("Password verification failed for user {Username}", username);
             return null;
         }
 
-        // Claims are key/value facts about the user embedded in the JWT
-        // payload - like Sanctum's token abilities or a Spring Security
-        // Authentication's principal details.
+        // Claims are key/value facts embedded in the JWT payload - like Sanctum's
+        // token abilities or a Spring Security Authentication's principal details.
         var Claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
@@ -65,6 +64,7 @@ public class AuthService(AppDbContext db, IHttpContextAccessor httpContextAccess
         var userNameTaken = await db.Users.AnyAsync(u => u.Username == username);
         if (userNameTaken)
         {
+            logger.LogWarning("User {Username} already exists",username);
             return null;
         }
 
@@ -79,17 +79,15 @@ public class AuthService(AppDbContext db, IHttpContextAccessor httpContextAccess
         };
         user.PasswordHash = hasher.HashPassword(user, password);
 
-        // Add() stages the new row; nothing hits the DB until
-        // SaveChangesAsync() - this is the "unit of work" pattern EF Core
-        // uses instead of an immediate INSERT per call.
+        // Add() stages the new row; nothing hits the DB until SaveChangesAsync() -
+        // EF Core's "unit of work" pattern instead of an immediate INSERT.
         db.Users.Add(user);
         await db.SaveChangesAsync();
         return user;
     }
 
-    // Reads the email/name straight off the current request's JWT claims -
-    // both were already put there at login (see the Claims array above),
-    // so this needs no database call.
+    // Reads email/name straight off the request's JWT claims (set at login
+    // above) - no database call needed.
     public CurrentUserDetails GetCurrentUserDetails()
     {
         var user = httpContextAccessor.HttpContext?.User;

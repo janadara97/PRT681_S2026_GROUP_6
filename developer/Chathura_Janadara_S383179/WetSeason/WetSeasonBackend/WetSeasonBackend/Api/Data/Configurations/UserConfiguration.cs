@@ -8,9 +8,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 {
   public void Configure(EntityTypeBuilder<User> builder)
   {
-    // Explicit here even though Id would be picked as the primary key by
-    // convention anyway (EF Core treats a property named Id, or <Type>Id,
-    // as the PK automatically).
+    // Explicit even though Id would be the PK by convention anyway (EF Core
+    // treats a property named Id or <Type>Id as the PK automatically).
     builder.HasKey(u => u.Id);
     builder.Property(u => u.Name).IsRequired().HasMaxLength(100);
     builder.Property(u => u.Username).IsRequired().HasMaxLength(50);

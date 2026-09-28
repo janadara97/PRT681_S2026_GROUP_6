@@ -4,9 +4,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace WetSeasonBackend.Api.Data.Configurations;
 
-// "Fluent API" config for the Community entity - column constraints that
-// don't belong on the model class itself, similar to a JPA @Column or a
-// Laravel migration's ->string('name', 120).
+// Fluent API config for Community - constraints that don't belong on the
+// model class, like a JPA @Column or a Laravel migration's ->string().
 public class CommunityConfiguration : IEntityTypeConfiguration<Community>
 {
     public void Configure(EntityTypeBuilder<Community> builder)

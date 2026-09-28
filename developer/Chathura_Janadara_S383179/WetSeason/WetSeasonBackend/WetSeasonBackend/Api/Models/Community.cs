@@ -1,8 +1,7 @@
 namespace WetSeasonBackend.Api.Models;
 
-// A plain C# class ("POCO") mapped to a DB table by EF Core convention -
-// no annotations needed for the basics; see CommunityConfiguration.cs for
-// the fine-tuning (max lengths, unique index).
+// A plain C# class ("POCO") mapped to a DB table by convention - see
+// CommunityConfiguration.cs for the fine-tuning (max lengths, unique index).
 public class Community
 {
     public int Id {get; set;}
@@ -11,8 +10,7 @@ public class Community
     public int Population { get; set; }
     public string ContactEmail { get; set; } = string.Empty;
 
-    // Navigation property: lets you write community.Incidents in code.
-    // Same idea as a Laravel hasMany() or a JPA @OneToMany - EF Core infers
-    // the relationship from this + Incident.Community below.
+    // Navigation property: lets you write community.Incidents in code - like a
+    // Laravel hasMany() or JPA @OneToMany, inferred from this + Incident.Community.
     public ICollection<Incident> Incidents { get; set; } = new List<Incident>();
 }

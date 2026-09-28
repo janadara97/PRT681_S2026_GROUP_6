@@ -21,10 +21,8 @@ public class ResourceAssignementConfiguration : IEntityTypeConfiguration<Resourc
             .HasForeignKey(a => a.IncidentId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // A "filtered unique index": ResourceId only has to be unique
-        // among rows where ReleasedAt is still null. This is how the DB
-        // enforces "a resource can only be actively assigned once" while
-        // still allowing many past (released) assignments for it.
+        // Filtered unique index: ResourceId is only unique among rows where
+        // ReleasedAt is null - enforces "one active assignment per resource" only.
         builder.HasIndex(a => a.ResourceId)
             .IsUnique()
             .HasFilter("[ReleasedAt] IS NULL");

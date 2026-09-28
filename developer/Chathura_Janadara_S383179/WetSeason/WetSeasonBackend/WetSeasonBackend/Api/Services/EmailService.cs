@@ -5,7 +5,7 @@ using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 namespace WetSeasonBackend.Api.Services;
 
-public class EmailService(IConfiguration configuration) : IEmailService
+public class EmailService(IConfiguration configuration, ILogger<EmailService> logger) : IEmailService
 {
     public async Task SendEmailAsync(string to, string subject, string body)
     {
@@ -30,17 +30,17 @@ public class EmailService(IConfiguration configuration) : IEmailService
         var username = configuration["EmailSettings:Username"];
         var password = configuration["EmailSettings:Password"];
         
-        // Skips the certificate *revocation* check specifically (not the
-        // rest of certificate validation - hostname/expiry/chain are still
-        // checked). Some networks block the OCSP revocation lookup itself,
-        // which .NET otherwise treats as a hard failure.
+        // Skips only the certificate *revocation* check (hostname/expiry/chain still
+        // checked) - some networks block the OCSP lookup, which .NET treats as fatal.
         smtp.CheckCertificateRevocation = false;
 
         // Connect using STARTTLS or SSL/TLS depending on your port (587 usually uses StartTls)
+        logger.LogInformation("Connecting to SMTP server {Server}:{Port}.", server, port);
         await smtp.ConnectAsync(server, port, SecureSocketOptions.StartTls);
         await smtp.AuthenticateAsync(username, password);
-        
+
         await smtp.SendAsync(email);
         await smtp.DisconnectAsync(true);
+        logger.LogInformation("Sent email to {Recipient} with subject {Subject}.", to, subject);
     }
 }

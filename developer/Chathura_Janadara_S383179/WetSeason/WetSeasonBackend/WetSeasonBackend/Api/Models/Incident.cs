@@ -11,9 +11,8 @@ public class Incident
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
-    // Foreign key + navigation property pair: CommunityId is the actual DB
-    // column, Community is the loaded related row (like a Laravel
-    // belongsTo() or JPA @ManyToOne). EF Core matches them by name/convention.
+    // FK + navigation property pair: CommunityId is the real DB column, Community
+    // is the loaded row (like a Laravel belongsTo() or JPA @ManyToOne).
     public int CommunityId { get; set; }
     public Community Community { get; set; } = null!;
 

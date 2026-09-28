@@ -1,9 +1,7 @@
 namespace WetSeasonBackend.Api.Models;
 
-// The "join table" entity linking an Incident to a Resource, with extra
-// columns (AssignedAt/ReleasedAt) - EF Core can't infer this many-to-many
-// automatically because of those extra fields, so it's modeled as its own
-// entity with two one-to-many relationships instead.
+// Join-table entity linking Incident and Resource, with extra columns
+// (AssignedAt/ReleasedAt) - modeled explicitly since EF Core can't infer this.
 public class ResourceAssignement
 {
     public int Id { get; set; }

@@ -3,9 +3,8 @@ using WetSeasonBackend.Api.Models;
 
 namespace WetSeasonBackend.Api.Data;
 
-// DbContext is EF Core's "unit of work" - it tracks entities you load/add
-// and writes all changes to the DB in one SaveChangesAsync() call. Similar
-// role to a JPA EntityManager or Laravel's underlying DB connection.
+// DbContext is EF Core's "unit of work" - tracks loaded/added entities and
+// writes changes in one SaveChangesAsync() call, like a JPA EntityManager.
 public class AppDbContext : DbContext
 {
     // Options (connection string, provider) are injected via DI - see
@@ -14,9 +13,8 @@ public class AppDbContext : DbContext
     {
     }
 
-    // Each DbSet<T> represents a table and is the entry point for querying
-    // it, e.g. db.Incidents.Where(...) - similar to a JPA Repository<T> or
-    // an Eloquent Model::query().
+    // Each DbSet<T> is a table and the entry point for querying it (e.g.
+    // db.Incidents.Where(...)) - like a JPA Repository<T> or Eloquent's Model::query().
     public DbSet<Incident>  Incidents => Set<Incident>();
     public DbSet<Community> Communities => Set<Community>();
     public DbSet<Resource> Resources => Set<Resource>();
@@ -25,11 +23,8 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Instead of configuring every entity here, EF Core scans this
-        // assembly for classes implementing IEntityTypeConfiguration<T>
-        // (see Api/Data/Configurations/) and applies each one. This is
-        // the Fluent API equivalent of JPA annotations or orm.xml, kept
-        // in separate files so this class stays uncluttered.
+        // Scans this assembly for IEntityTypeConfiguration<T> classes (see
+        // Api/Data/Configurations/) instead of configuring every entity inline here.
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
     }
 }

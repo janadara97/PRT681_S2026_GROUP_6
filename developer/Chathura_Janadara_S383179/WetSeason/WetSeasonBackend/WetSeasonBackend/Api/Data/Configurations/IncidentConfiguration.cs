@@ -8,9 +8,8 @@ public class IncidentConfiguration : IEntityTypeConfiguration<Incident>
 {
     public void Configure(EntityTypeBuilder<Incident> builder)
     {
-        // HasConversion<string>() stores the enum as text ("Responding")
-        // instead of an integer, so the raw DB rows stay human-readable -
-        // similar to a Laravel enum cast or JPA's @Enumerated(STRING).
+        // HasConversion<string>() stores the enum as text ("Responding") not an int,
+        // so raw DB rows stay readable - like a Laravel enum cast or JPA's @Enumerated(STRING).
         builder.Property(i => i.Status)
             .HasConversion<String>()
             .HasMaxLength(50)
@@ -26,9 +25,8 @@ public class IncidentConfiguration : IEntityTypeConfiguration<Incident>
             .IsRequired()
             .HasMaxLength(100);
 
-        // Defines the FK relationship: many Incidents belong to one
-        // Community. Restrict = block deleting a Community that still has
-        // Incidents, instead of cascading the delete.
+        // FK relationship: many Incidents belong to one Community. Restrict = block
+        // deleting a Community that still has Incidents, instead of cascading.
         builder.HasOne(i => i.Community)
             .WithMany(i => i.Incidents)
             .HasForeignKey(i => i.CommunityId)

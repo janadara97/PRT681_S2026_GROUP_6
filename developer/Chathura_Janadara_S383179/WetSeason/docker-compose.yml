@@ -21,6 +21,77 @@ services:
       retries: 10
       start_period: 20s
 
+  # Seq is a log server with a searchable UI, built specifically for
+  # structured events like Serilog's - port 80 handles both the web UI
+  # and the ingestion API Serilog's Seq sink posts to.
+  seq:
+    image: datalust/seq:latest
+    environment:
+      ACCEPT_EULA: "Y"
+      SEQ_FIRSTRUN_NOAUTHENTICATION: "true"
+    ports:
+      - "5341:80"
+    volumes:
+      - seq-data:/data
+
+  # Exceptionless: self-hosted exception tracking (needs Elasticsearch + Redis, unlike Seq's single container).
+  exceptionless-elasticsearch:
+    image: exceptionless/elasticsearch:8.19.21
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: -Xms1g -Xmx1g
+    volumes:
+      - exceptionless-esdata:/usr/share/elasticsearch/data
+
+  exceptionless-redis:
+    image: redis:7.4-alpine
+
+  exceptionless:
+    image: exceptionless/app:latest
+    depends_on:
+      - exceptionless-elasticsearch
+      - exceptionless-redis
+    environment:
+      EX_AppMode: Production
+      EX_ConnectionStrings__Cache: provider=redis
+      EX_ConnectionStrings__Elasticsearch: server=http://exceptionless-elasticsearch:9200
+      EX_ConnectionStrings__MessageBus: provider=redis
+      EX_ConnectionStrings__Queue: provider=redis
+      EX_ConnectionStrings__Redis: exceptionless-redis,abortConnect=false
+      EX_ConnectionStrings__Storage: provider=folder;path=/app/storage
+      EX_RunJobsInProcess: "false"
+    ports:
+      - "7110:8080"
+    volumes:
+      - exceptionless-appdata:/app/storage
+
+  exceptionless-jobs:
+    image: exceptionless/job:latest
+    depends_on:
+      - exceptionless
+    environment:
+      EX_AppMode: Production
+      EX_BaseURL: http://localhost:7110
+      EX_ConnectionStrings__Cache: provider=redis
+      EX_ConnectionStrings__Elasticsearch: server=http://exceptionless-elasticsearch:9200
+      EX_ConnectionStrings__MessageBus: provider=redis
+      EX_ConnectionStrings__Queue: provider=redis
+      EX_ConnectionStrings__Redis: exceptionless-redis,abortConnect=false
+      EX_ConnectionStrings__Storage: provider=folder;path=/app/storage
+    volumes:
+      - exceptionless-appdata:/app/storage
+
+  temporal:
+    image: temporalio/temporal:latest
+    command: server start-dev --ip 0.0.0.0
+    ports:
+      - "7233:7233"
+      - "8233:8233"
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+
   backend:
     build:
       context: ./WetSeasonBackend/WetSeasonBackend
@@ -38,6 +109,19 @@ services:
       Jwt__Key: "${JWT_KEY:-O30F07pjBXTLfwcMVOj2V00F28+vfYoA1A5WWCazmKY=}"
       Jwt__Issuer: "WetSeasonApi"
       Cors__AllowedOrigins: "http://localhost:5173,http://localhost:5174,http://localhost:3000"
+      # Overrides just the Seq sink's URL from appsettings.json's WriteTo[1] -
+      # "seq" is Docker's internal DNS name for the seq service, unreachable
+      # as "localhost" from inside this container. Index-based, so this
+      # silently targets the wrong sink if WriteTo's order ever changes.
+      Serilog__WriteTo__1__Args__serverUrl: "http://seq:5341"
+      Exceptionless__ApiKey: "pvQEJwQXLhFRPWnYfAfHdJ7ifI0fBxI8cWcfZN7A"
+      Exceptionless__ServerUrl: "http://exceptionless:8080"
+      # No "http://" here - unlike Seq/Exceptionless above, the Temporal SDK
+      # treats this as a bare gRPC host:port, not a URL. Adding a scheme makes
+      # it throw "TargetHost cannot have ://" and crash the whole app on
+      # startup, since a failed background service (the Temporal worker)
+      # stops the whole host by default.
+      Temporal__Address: "temporal:7233"
     ports:
       - "5118:8080"
     develop:
@@ -49,6 +133,12 @@ services:
     depends_on:
       sqlserver:
         condition: service_healthy
+      # No healthcheck defined on the temporal service, so this can only wait
+      # for the container to start, not for the dev server inside it to be
+      # ready to accept connections - the Temporal client itself retries on
+      # connect, so a few seconds' lag here isn't fatal, just worth knowing.
+      temporal:
+        condition: service_started
 
   frontend:
     build:
@@ -65,3 +155,6 @@ services:
 
 volumes:
   sqlserver-data:
+  seq-data:
+  exceptionless-esdata:
+  exceptionless-appdata:

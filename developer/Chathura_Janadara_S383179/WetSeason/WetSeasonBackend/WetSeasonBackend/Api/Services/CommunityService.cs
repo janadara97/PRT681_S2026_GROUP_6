@@ -4,11 +4,11 @@ using WetSeasonBackend.Api.Dtos;
 
 namespace WetSeasonBackend.Api.Services;
 
-public class CommunityService(AppDbContext db)
+public class CommunityService(AppDbContext db, ILogger<CommunityService> logger)
 {
     public List<CommunityListItemDto> GetAllCommunities()
     {
-        return db.Communities
+        var communities = db.Communities
             .Select(c => new CommunityListItemDto
             {
                 Id = c.Id,
@@ -18,5 +18,7 @@ public class CommunityService(AppDbContext db)
                 ContactEmail = c.ContactEmail
             })
             .ToList();
+        logger.LogInformation("Fetched {Count} communities.", communities.Count);
+        return communities;
     }
 }
