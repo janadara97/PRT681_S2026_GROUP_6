@@ -26,7 +26,7 @@ builder.Host.UseSerilog();
 var exceptionlessApiKey = builder.Configuration["Exceptionless:ApiKey"];
 var exceptionlessServerUrl = builder.Configuration["Exceptionless:ServerUrl"];
 
-if (string.IsNullOrEmpty(exceptionlessServerUrl)) 
+if (string.IsNullOrEmpty(exceptionlessServerUrl))
 {
     exceptionlessServerUrl = "http://localhost:7110"; // Default Exceptionless server URL
 }
@@ -111,6 +111,12 @@ builder.Services.AddTemporalClient(
 var temporalWorker = builder.Services.AddHostedTemporalWorker(taskQueue: "wetseason-incidents");
 temporalWorker.AddScopedActivities<EmailActivities>();
 temporalWorker.AddWorkflow<IncidentUpdatedWorkflow>();
+
+
+builder.Services.Configure<HostOptions>(options =>
+{
+    options.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.Ignore;
+});
 
 builder.Services.AddAuthorization(); // enables the [Authorize] attribute
 
