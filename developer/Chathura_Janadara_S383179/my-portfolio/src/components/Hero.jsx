@@ -81,7 +81,7 @@ export default function Hero() {
                         </a>
                         <a
                             href="/resume.pdf"
-                            download
+                            download="Chathura-Janadara-Resume.pdf"
                             className="flex items-center gap-2 rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-blue-600 hover:text-blue-700 dark:border-slate-700 dark:text-slate-200 dark:hover:border-blue-400 dark:hover:text-blue-400"
                         >
                             <FiDownload size={16} /> Download Resume

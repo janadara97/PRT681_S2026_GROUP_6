@@ -29,7 +29,7 @@ export default function Navbar({ theme, toggleTheme }) {
           <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
           <a
             href="/resume.pdf"
-            download
+            download="Chathura-Janadara-Resume.pdf"
             className="flex items-center gap-2 rounded-full bg-blue-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-800"
           >
             <FiDownload size={14} /> Resume
@@ -63,7 +63,7 @@ export default function Navbar({ theme, toggleTheme }) {
             ))}
             <a
               href="/resume.pdf"
-              download
+              download="Chathura-Janadara-Resume.pdf"
               className="flex w-fit items-center gap-2 rounded-full bg-blue-700 px-4 py-2 text-sm font-semibold text-white"
             >
               <FiDownload size={14} /> Resume

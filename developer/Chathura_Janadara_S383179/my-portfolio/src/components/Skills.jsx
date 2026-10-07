@@ -5,9 +5,12 @@ import { skillIcons } from "../data/skillIcons";
 const categoryAccents = {
   "Backend / APIs": "#2563EB",
   "Frontend / Mobile": "#059669",
+  "UI Design & Accessibility": "#DB2777",
   "DevOps / CI-CD": "#D97706",
-  "Databases & Identity": "#E11D48",
-  "BI / Low-code": "#7C3AED",
+  "Cloud & Databases": "#E11D48",
+  "Identity & Security": "#4F46E5",
+  "Observability & Tools": "#0D9488",
+  "CMS / Low-code / BI": "#7C3AED",
   "Data / ML": "#0891B2",
 };
 
