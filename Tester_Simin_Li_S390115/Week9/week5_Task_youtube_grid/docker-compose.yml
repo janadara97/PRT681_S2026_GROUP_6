@@ -1,0 +1,60 @@
+# Selenium Grid (1 Hub + Chrome / Firefox / Edge nodes) + the test-suite container
+#
+#   Start the Grid:            docker compose up -d selenium-hub chrome firefox edge
+#   Grid console:              http://localhost:4444/ui
+#   Watch the browser live:    run tests with HEADLESS=false, then open http://localhost:7900 (chrome)
+#                              7901 (firefox) / 7902 (edge); password: secret
+#   Run one browser:           BROWSER=firefox docker compose run --rm tests
+#   All 3 browsers in parallel: ./scripts/run_all.sh
+#
+# Apple Silicon (M-series) note: Edge has no arm64 image; use the Chromium node for Chrome:
+#   CHROME_NODE_IMAGE=selenium/node-chromium BROWSERS="chrome firefox" ./scripts/run_all.sh
+
+x-node: &node
+  shm_size: 2gb                       # browsers need a large /dev/shm, otherwise they crash easily
+  depends_on: [selenium-hub]
+  environment:
+    SE_EVENT_BUS_HOST: selenium-hub
+    SE_EVENT_BUS_PUBLISH_PORT: "4442"
+    SE_EVENT_BUS_SUBSCRIBE_PORT: "4443"
+    SE_NODE_MAX_SESSIONS: "${SE_NODE_MAX_SESSIONS:-2}"   # concurrent sessions per node (parallelism)
+    SE_NODE_OVERRIDE_MAX_SESSIONS: "true"
+    SE_VNC_NO_PASSWORD: "false"
+
+services:
+  selenium-hub:
+    image: selenium/hub:${SELENIUM_TAG:-4.48.0-20260905}
+    container_name: selenium-hub
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+
+  chrome:
+    <<: *node
+    image: ${CHROME_NODE_IMAGE:-selenium/node-chrome}:${SELENIUM_TAG:-4.48.0-20260905}
+    ports: ["7900:7900"]
+
+  firefox:
+    <<: *node
+    image: selenium/node-firefox:${SELENIUM_TAG:-4.48.0-20260905}
+    ports: ["7901:7900"]
+
+  edge:
+    <<: *node
+    image: selenium/node-edge:${SELENIUM_TAG:-4.48.0-20260905}
+    ports: ["7902:7900"]
+
+  # The test suite itself (the profile keeps `docker compose up` from starting it)
+  tests:
+    profiles: ["tests"]
+    build: .
+    image: youtube-bdd-tests:local
+    depends_on: [selenium-hub]
+    environment:
+      BROWSER: ${BROWSER:-chrome}
+      TAGS: ${TAGS:-}
+      HEADLESS: ${HEADLESS:-true}
+      SELENIUM_REMOTE_URL: http://selenium-hub:4444
+    volumes:
+      - ./reports:/tests/reports        # write reports/screenshots back to the host; CI uploads them as artifacts

@@ -1,0 +1,108 @@
+# Azure DevOps version (equivalent to .github/workflows/e2e.yml — use either one)
+# Pipelines → New pipeline → pick the repo → "Existing Azure Pipelines YAML file" → select this file
+
+trigger:
+  branches:
+    include: [main]
+
+pr:
+  branches:
+    include: ["*"]
+
+schedules:                     # synthetic monitoring: run @smoke every 6 hours
+  - cron: "17 */6 * * *"
+    displayName: Synthetic monitor
+    branches:
+      include: [main]
+    always: true
+
+parameters:
+  - name: injectFailure
+    displayName: Run @demo_failure (simulated regression)
+    type: boolean
+    default: false
+
+stages:
+  - stage: E2E
+    jobs:
+      - job: BDD
+        displayName: BDD on
+        timeoutInMinutes: 20
+        pool:
+          vmImage: ubuntu-latest
+        strategy:
+          maxParallel: 3        # run the three browsers in parallel
+          matrix:
+            chrome:  { BROWSER: chrome }
+            firefox: { BROWSER: firefox }
+            edge:    { BROWSER: edge }
+        steps:
+          - bash: |
+              if [ "$(Build.Reason)" = "Schedule" ]; then
+                echo "##vso[task.setvariable variable=TAGS]@smoke"
+              elif [ "${{ parameters.injectFailure }}" = "True" ]; then
+                echo "##vso[task.setvariable variable=TAGS]@search or @demo_failure"
+              fi
+            displayName: Decide which scenarios to run
+
+          - bash: docker compose up -d selenium-hub $(BROWSER)
+            displayName: Start Selenium Grid
+
+          - bash: docker compose build tests
+            displayName: Build test-suite image
+
+          - bash: docker compose run --rm -e BROWSER -e TAGS -e HEADLESS=true tests
+            displayName: Run BDD suite headless on $(BROWSER)
+            env:
+              BROWSER: $(BROWSER)
+              TAGS: $(TAGS)
+
+          # JUnit → Azure "Tests" tab; any failed test fails this task → the build fails
+          - task: PublishTestResults@2
+            condition: always()
+            displayName: Publish JUnit results
+            inputs:
+              testResultsFormat: JUnit
+              testResultsFiles: reports/junit/**/*.xml
+              testRunTitle: BDD – $(BROWSER)
+              failTaskOnFailedTests: true
+
+          - bash: docker compose logs --no-color > reports/grid-$(BROWSER).log 2>&1 || true
+            condition: failed()
+            displayName: Save Grid logs
+
+          - task: PublishPipelineArtifact@1
+            condition: always()
+            displayName: Upload raw results
+            inputs:
+              targetPath: reports
+              artifact: results-$(BROWSER)
+
+          - bash: docker compose down --remove-orphans
+            condition: always()
+            displayName: Stop Grid
+
+  - stage: Report
+    dependsOn: E2E
+    condition: always()
+    jobs:
+      - job: Allure
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              patterns: results-*/**
+              path: $(Pipeline.Workspace)/dl
+          - bash: |
+              mkdir -p reports/allure-results
+              for d in $(Pipeline.Workspace)/dl/results-*; do
+                cp -r "$d"/allure-results/* reports/allure-results/ 2>/dev/null || true
+              done
+              python3 scripts/merge_allure_results.py reports/allure-results reports/allure-merged
+              npx --yes allure-commandline@2 generate reports/allure-merged -o allure-report --clean
+            displayName: Merge & generate Allure report
+          - task: PublishPipelineArtifact@1
+            inputs:
+              targetPath: allure-report
+              artifact: allure-report
