@@ -3,15 +3,21 @@ import { coreStack, skillGroups } from "../data/portfolioData";
 import { skillIcons } from "../data/skillIcons";
 
 const categoryAccents = {
-  "Backend / APIs": "#2563EB",
-  "Frontend / Mobile": "#059669",
-  "UI Design & Accessibility": "#DB2777",
-  "DevOps / CI-CD": "#D97706",
-  "Cloud & Databases": "#E11D48",
-  "Identity & Security": "#4F46E5",
-  "Observability & Tools": "#0D9488",
-  "CMS / Low-code / BI": "#7C3AED",
-  "Data / ML": "#0891B2",
+  "Programming Languages": "#475569",
+  "Backend": "#2563EB",
+  "Integration & APIs": "#0284C7",
+  "Databases": "#E11D48",
+  "Frontend & Mobile": "#059669",
+  "UI Design & Prototyping": "#DB2777",
+  "CMS & Content Platforms": "#7C3AED",
+  "Testing": "#65A30D",
+  "Authentication": "#4F46E5",
+  "DevOps & CI/CD": "#D97706",
+  "Cloud, BI & Microsoft Platform": "#0078D4",
+  "Logging & Monitoring": "#0D9488",
+  "Data & Machine Learning": "#0891B2",
+  "Development Tools": "#EA580C",
+  "Methodologies": "#CA8A04",
 };
 
 function SkillChip({ item }) {

@@ -1,14 +1,14 @@
 export const personal = {
     name: "Chathura Janadara Kodithuwakku",
-    title: "Tech Explorer | Software Engineer | Data Enthusiast | Passionate About IT Evolution",
-    location: "Darwin, NT, Australia",
+    title: "Full-Stack Software Engineer",
+    location: "Berrimah, NT 0828, Australia",
     email: "chathurajanadara97@gmail.com",
     phone: "+61 408 193 825",
     linkedin: "https://www.linkedin.com/in/chathura-janadara/",
     github: "https://github.com/janadara97",
     website: "https://www.chathura.com.au",
     summary:
-        "Software Developer and Associate Member of the Australian Computer Society with nearly 4 years of experience supporting digital transformation initiatives across government, education and aviation sectors. Skilled in full-stack development, scripting, and the administration of development, test and production environments across Windows and Linux platforms. Proven ability to build, maintain and support core enterprise applications. Based locally in Darwin.",
+        "Full-Stack Software Engineer with nearly four years of commercial experience building multi-layered web applications and REST/SOAP integrations across aviation, banking, education and telecommunications. Skilled in C#, .NET (ASP.NET Core Web API, MVC, Entity Framework Core), SQL Server, Java (Spring Boot), React, AngularJS and Azure. Proven ability to turn operational data into actionable business insights using MySQL and Power BI. Holds a current NT Ochre Card and National Police Check.",
 };
 
 export const quickFacts = [
@@ -16,196 +16,241 @@ export const quickFacts = [
     { label: "Experience", value: "Nearly 4 years, full-stack" },
     {
         label: "Compliance",
-        value: "Current WWCC (Ochre) & National Police Check",
+        value: "Current NT Ochre Card & National Police Check",
     },
     {
         label: "Study",
-        value: "Master of IT (Software Engineering), CDU — completing Oct 2026",
+        value: "Master of IT (Software Engineering), CDU — Nov 2024 – Oct 2026",
     },
 ];
 
 export const heroIntro = [
     { text: "I'm a " },
     { text: "Full-Stack Software Engineer", emphasis: "italic" },
-    { text: " based out of Darwin, Australia, building " },
-    { text: "practical software and data-driven systems", emphasis: "bold" },
-    { text: " across government, education and aviation. " },
+    { text: " based in Darwin, Australia, building " },
+    { text: "multi-layered web applications and REST/SOAP integrations", emphasis: "bold" },
+    { text: " across aviation, banking, education and telecommunications. " },
     { text: "Nearly 4 years", emphasis: "bold" },
-    { text: " designing and shipping " },
+    { text: " of commercial experience designing and shipping " },
     { text: "software", emphasis: "italic" },
     { text: " that scales." },
 ];
 
 export const coreToolkit = [
-    "Full-Stack Development (React & .NET)",
-    "ASP.NET Core & Entity Framework",
+    "C# & .NET (ASP.NET Core Web API, MVC)",
+    "Entity Framework Core & SQL Server",
+    "REST / SOAP Integrations & Microservices",
     "Java & Spring Boot",
-    "DevOps & CI/CD (Docker, Jenkins)",
-    "Azure Cloud & Identity (App Services, Blob Storage, MSAL)",
-    "Azure DevOps & CI/CD Pipelines",
-    "SQL Server & MySQL",
-    "Power BI & Data Analytics",
+    "React & AngularJS",
+    "Azure (App Service, Container Apps, Blob Storage)",
+    "DevOps & CI/CD (Docker, Jenkins, Azure DevOps)",
+    "MySQL & Power BI Reporting",
     "Agile Delivery (Jira, Scrum)",
 ];
 
 export const coreStack = [
-    "React",
     ".NET / C#",
+    "ASP.NET Core",
+    "SQL Server",
     "Java / Spring Boot",
-    "REST APIs",
-    "SQL Server / MySQL",
+    "React",
+    "REST / SOAP APIs",
     "Azure",
 ];
 
 export const skillGroups = [
     {
-        title: "Backend / APIs",
+        title: "Programming Languages",
+        items: ["C#", "Java", "JavaScript", "TypeScript", "Python", "PHP", "SQL"],
+    },
+    {
+        title: "Backend",
         items: [
-            "Java",
-            "C#",
             ".NET Core",
+            "ASP.NET Core",
+            "Entity Framework Core",
+            "LINQ",
             "Spring Boot",
-            "PHP",
-            "Laravel",
+            "Spring Security",
+            "Spring Data JPA",
+            "Spring Cloud",
             "Node.js",
             "Express.js",
-            "Python",
-            "REST",
-            "gRPC",
-            "SOAP",
-            "Swagger",
-            "OpenAPI",
-            "Microservices",
-            "RabbitMQ",
+            "Sequelize",
+            "Laravel",
         ],
     },
     {
-        title: "Frontend / Mobile",
+        title: "Integration & APIs",
         items: [
-            "JavaScript",
-            "TypeScript",
+            "REST APIs",
+            "SOAP Web Services",
+            "gRPC",
+            "RabbitMQ",
+            "Swagger",
+            "Microservices",
+            "Third-party & Payment Integrations",
+        ],
+    },
+    {
+        title: "Databases",
+        items: ["SQL Server", "MySQL", "PostgreSQL", "SQLite", "Redis", "Firebase"],
+    },
+    {
+        title: "Frontend & Mobile",
+        items: [
             "React",
             "Next.js",
+            "AngularJS",
+            "Vue.js",
+            "Vuex",
             "KendoReact",
             "React Native",
             "Expo",
-            "Vue.js",
-            "Vuex",
-            "AngularJS",
-            "Vite",
-            "Tailwind CSS",
-            "Bootstrap",
-            "jQuery",
             "HTML5",
             "CSS3",
             "SCSS",
-            "Responsive UI",
+            "jQuery",
+            "Bootstrap",
+            "Tailwind CSS",
         ],
     },
     {
-        title: "UI Design & Accessibility",
-        items: [
-            "Figma",
-            "Adobe XD",
-            "Semantic HTML",
-            "ARIA",
-            "Keyboard Navigation",
-            "Colour Contrast Testing",
-            "Google Lighthouse",
-            "User-Centred Design",
-        ],
+        title: "UI Design & Prototyping",
+        items: ["Figma", "Adobe XD"],
     },
     {
-        title: "DevOps / CI-CD",
+        title: "CMS & Content Platforms",
+        items: ["Squiz DXP", "Custom CMS Development", "SharePoint"],
+    },
+    {
+        title: "Testing",
+        items: ["Unit Testing", "Cross-device Testing", "NUnit", "JUnit", "Jest"],
+    },
+    {
+        title: "Authentication",
+        items: ["MSAL / Entra ID", "Keycloak", "Clerk", "OpenLDAP", "Firebase Auth", "JWT"],
+    },
+    {
+        title: "DevOps & CI/CD",
         items: [
-            "Docker",
-            "Jenkins",
             "Git",
-            "GitHub Actions",
+            "GitHub",
             "Azure DevOps",
+            "GitHub Actions",
             "GitLab CI",
             "Bitbucket Pipelines",
+            "Jenkins",
+            "Docker",
             "SonarQube",
+            "IIS",
             "Nginx",
+            "Apache",
             "Linux",
+            "PowerShell",
         ],
     },
     {
-        title: "Cloud & Databases",
+        title: "Cloud, BI & Microsoft Platform",
         items: [
             "Azure Container Apps",
             "Azure Container Registry",
             "Azure App Service",
             "Azure Blob Storage",
-            "SQL Server",
-            "PostgreSQL",
-            "MySQL",
-            "Oracle",
-            "Redis",
-            "SQLite",
-        ],
-    },
-    {
-        title: "Identity & Security",
-        items: [
-            "JWT",
-            "MSAL / Entra ID",
-            "Keycloak",
-            "Clerk",
-            "Firebase Auth",
-            "Role-Based Access Control",
-            "Secure Coding (XSS, CSRF, SQL Injection)",
-            "PCI Standards",
-        ],
-    },
-    {
-        title: "Observability & Tools",
-        items: [
-            "Serilog",
-            "Seq",
-            "Exceptionless",
-            "Temporal.io",
-            "Jira",
-            "Chrome DevTools",
-            "VS Code",
-            "Agile",
-            "Scrum",
-        ],
-    },
-    {
-        title: "CMS / Low-code / BI",
-        items: [
-            "Squiz DXP",
-            "Custom CMS",
-            "SharePoint",
-            "SPFx",
+            "Azure VMs",
+            "Power BI",
             "Power Apps",
             "Power Automate",
+            "SPFx",
             "Microsoft 365",
-            "Power BI",
-            "Drupal (learning)",
         ],
     },
     {
-        title: "Data / ML",
+        title: "Logging & Monitoring",
+        items: ["Serilog", "Seq", "Exceptionless", "Temporal.io"],
+    },
+    {
+        title: "Data & Machine Learning",
+        items: ["Machine Learning", "Deep Learning", "EDA", "Acoustic Signal Processing"],
+    },
+    {
+        title: "Development Tools",
         items: [
-            "Python",
-            "Machine Learning",
-            "Deep Learning",
-            "EDA",
-            "Acoustic Signal Processing",
+            "Visual Studio",
+            "SSMS",
+            "Rider",
+            "VS Code",
+            "IntelliJ IDEA",
+            "DataGrip",
+            "PhpStorm",
+            "Chrome DevTools",
+            "Jira",
         ],
+    },
+    {
+        title: "Methodologies",
+        items: ["Agile", "Scrum"],
     },
 ];
 
 export const featuredProjects = [
     {
+        title: "GovWallet NT — Privacy-First Concession Card Wallet",
+        period: "CDU IT Code Fair 2026, Darwin",
+        problem:
+            "Proving you are eligible for a concession usually means showing a card that reveals your personal details to whoever checks it.",
+        solution:
+            "A digital wallet that lets a cardholder prove eligibility by QR code without revealing personal details, using SD-JWT selective disclosure. An ASP.NET Core issuer API signs credentials with ECDSA P-256, and two React PWAs — a wallet with a non-extractable device key and an offline verifier that shows only \"eligible\" or \"not eligible\" — are deployed on Azure, with tests and a threat model.",
+        stack: [
+            "C#",
+            "ASP.NET Core Web API",
+            "Entity Framework Core",
+            "SQLite",
+            "React",
+            "Progressive Web Apps (PWA)",
+            "SD-JWT",
+            "KB-JWT",
+            "JWK",
+            "ECDSA P-256",
+            "WebCrypto API",
+            "html5-qrcode",
+            "SCSS",
+        ],
+        link: "https://www.govwallet.wallet.chathura.com.au",
+    },
+    {
+        title: "NT FireWatch — Geospatial Bushfire Monitoring Platform",
+        period: "Personal full-stack project, Darwin",
+        problem:
+            "Communities and responders need near-real-time visibility into bushfire activity across the Northern Territory's vast geography.",
+        solution:
+            "A cross-platform application that visualises near-real-time satellite fire-hotspot data across the Northern Territory, ingesting and spatially filtering feeds to an interactive map with recency-based styling and secure user access, deployed to the cloud through an automated CI/CD pipeline.",
+        stack: [
+            "React",
+            "Expo (web and mobile)",
+            "Express.js",
+            "PostgreSQL",
+            "PostGIS",
+            "QGIS",
+            "Clerk",
+            "Docker",
+            "Jenkins CI/CD",
+            "Apache HTTP Server",
+            "AlmaLinux (RHEL)",
+            "Azure",
+        ],
+        githubUrl: "https://github.com/janadara97/nt-fire-watch",
+        link: "https://www.firewatch.chathura.com.au",
+        powerBiEmbedUrl:
+            "https://app.powerbi.com/view?r=eyJrIjoiMTE5ODcwZjgtZWMyZC00MDllLWFhOTctMGIzYTZkMjliNTZlIiwidCI6IjlmMjQ4NzY3LThlMWEtNDJmMy04MzZmLWMwOTJhYjk1ZmY3MCJ9",
+    },
+    {
         title: "NT Wet Season Incident & Resource Coordinator",
-        period: "Personal full-stack project — in development",
+        period: "Personal full-stack project (in development), Darwin",
         problem:
             "During NT wet season emergencies, field officers and coordinators need a reliable way to report incidents and allocate limited equipment without conflicts like double-booking the same resource.",
         solution:
-            "A full-stack incident coordination system where field officers log incidents and coordinators assign resources, with business-rule enforcement built into the API layer to prevent scheduling conflicts.",
+            "A full-stack incident coordination system that enables field officers to report incidents and coordinators to assign resources, while enforcing business rules that prevent conflicts such as double-booked equipment.",
         stack: [
             ".NET",
             "C#",
@@ -224,36 +269,10 @@ export const featuredProjects = [
         comingSoon: true,
         progress: [
             { label: "Planning & Architecture", done: true },
-            { label: "Backend API (ASP.NET Core + EF Core)", active: true },
-            { label: "Frontend (React)" },
-            { label: "Deployment & Testing" },
+            { label: "Backend API (ASP.NET Core + EF Core)", done: true },
+            { label: "Frontend (React)", done: true },
+            { label: "Deployment & Testing", active: true },
         ],
-    },
-    {
-        title: "NT FireWatch — Geospatial Bushfire Monitoring Platform",
-        period: "Personal full-stack project",
-        problem:
-            "Communities and responders need near-real-time visibility into bushfire activity across the Northern Territory's vast geography.",
-        solution:
-            "A cross-platform (web & mobile) application that ingests and spatially filters satellite fire-hotspot feeds onto an interactive map with recency-based styling and secure access, deployed to the cloud through an automated CI/CD pipeline.",
-        stack: [
-            "React",
-            "Expo",
-            "Express",
-            "PostgreSQL",
-            "PostGIS",
-            "QGIS",
-            "Clerk",
-            "Docker",
-            "Jenkins CI/CD",
-            "Apache HTTP Server",
-            "AlmaLinux",
-            "Azure",
-        ],
-        githubUrl: "https://github.com/janadara97/nt-fire-watch",
-        link: "https://www.firewatch.chathura.com.au",
-        powerBiEmbedUrl:
-            "https://app.powerbi.com/view?r=eyJrIjoiMTE5ODcwZjgtZWMyZC00MDllLWFhOTctMGIzYTZkMjliNTZlIiwidCI6IjlmMjQ4NzY3LThlMWEtNDJmMy04MzZmLWMwOTJhYjk1ZmY3MCJ9",
     },
     {
         title: "Underwater Acoustic & Sonar-Based Ship Detection",
@@ -274,42 +293,41 @@ export const featuredProjects = [
 ];
 
 export const otherProjects = [
-    // {
-    //     title: "Digital Platform for Medical Student Progression & Records",
-    //     period: "Charles Darwin University",
-    //     description:
-    //         "A low-code platform for tracking medical student progression and records.",
-    //     stack: ["Power Apps", "Power Automate", "SharePoint", "Microsoft 365"],
-    // },
+    {
+        title: "Digital Platform for Medical Student Progression & Records",
+        period: "Charles Darwin University",
+        description: "Developed a platform for tracking medical students' progress and records.",
+        stack: ["Power Apps", "Power Automate", "SharePoint", "Microsoft 365"],
+    },
 ];
 
 export const experience = [
     {
         company: "Haileybury Rendall School",
-        location: "Berrimah, Darwin",
-        period: "Jul 2026 – Present",
+        location: "Berrimah, Darwin, NT",
+        period: "Jul 2026 – Sep 2026",
         roles: ["DevOps Engineer — Internship"],
         bullets: [
-            "Redesigned a legacy school web application as a responsive React and Tailwind CSS single-page app, using semantic HTML, keyboard navigation, contrast checks and Lighthouse audits to improve accessibility.",
-            "Built and administered the Subject Guide application, a content management system where staff create and publish subject content and videos, managing user roles and permissions.",
-            "Integrated MSAL (Microsoft Entra ID) single sign-on, Azure Blob Storage, a Laravel REST API and MySQL, deployed with Docker.",
-            "Designed user-friendly admin workflows with one task per screen, tooltips, validation and confirmation messages, reducing input errors for staff.",
-            "Gathered requirements from teachers and admin staff, and wrote plain-language user guides and developer documentation.",
-            "Collaborate in an Agile team using Git, Jira and CI/CD, contributing to code reviews and continuous improvement, and providing IT support to students and staff.",
+            "Modernised Subject Guide, a legacy web application that helps students and parents choose school subjects, into a responsive React single-page application backed by a Laravel REST API with strict request validation and versioned endpoints.",
+            "Built a CRM-style admin panel for staff to manage subject content and to create and manage parent–teacher meetings.",
+            "Learned Microsoft Entra ID (MSAL) and Azure Blob Storage on the job, delivering role-based authentication and secure file delivery with SAS tokens.",
+            "Analysed legacy systems by tracing data flows across the database and application code, documenting findings before changes, and consolidating duplicate and inconsistent records into a single trusted record.",
+            "Containerised the application with Docker, managed Git branching and pull requests in Bitbucket, and wrote unit tests with Jest.",
+            "Worked in an Agile team using Jira, contributing to code reviews and technical documentation, including API reference guides and database schemas.",
+            "Delivered daily IT help desk support, resolving application, hardware and account access issues for students and staff.",
         ],
     },
     {
         company: "True Blue IT — Darwin Innovation Hub",
-        location: "Darwin",
+        location: "Darwin, NT",
         period: "Apr 2025 – Jul 2025",
         roles: ["Software Engineer"],
         bullets: [
-            "Designed app screens and user flows in Figma, then built a cross-platform mobile app using React Native and Express.js, covering the user interface and secure API integration.",
-            "Applied accessibility and performance practices, including colour contrast, screen reader labels and optimised loading, so the app worked well for all users across devices.",
-            "Set up Google Analytics to track user behaviour and used the insights to improve usability.",
-            "Created marketing and presentation visuals in Canva and presented progress demos to stakeholders.",
-            "Tested and resolved bugs, and wrote technical documentation and handover notes to support project continuity.",
-            "Collaborated with mentors and industry experts through the CodeUp NT program.",
+            "Designed and built a cross-platform mobile app with React Native, and developed the Express.js REST API behind it, including secure authentication and data integration.",
+            "Tested the app across devices, wrote unit tests with Jest, and resolved bugs before release, delivering a stable app on iOS and Android.",
+            "Designed and managed MySQL databases, keeping data accurate and consistent for business reporting.",
+            "Wrote technical documentation and handover notes so the next development team could continue without disruption.",
+            "Presented progress and worked with mentors and industry experts through the CodeUp NT program.",
         ],
     },
     {
@@ -321,12 +339,14 @@ export const experience = [
             "Software Engineer (Aug 2022 – Dec 2023)",
         ],
         bullets: [
-            "Led front-end development for Air Arabia's customer-facing Internet Booking Engine using AngularJS and SCSS, integrated with a Java Spring Boot backend, focusing on usability, performance and security.",
-            "Built and integrated REST APIs for payments and third-party services, following PCI security standards and protecting sensitive passenger data.",
-            "Prioritised and resolved production issues within SLA, tracing root causes through log analysis while keeping planned releases on track.",
-            "Improved service reliability through Jenkins and Docker deployment automation and database optimisation.",
-            "Worked closely with product managers and the UI/UX team to clarify requirements, and mentored junior developers through code reviews.",
-            "Built Power BI dashboards to identify recurring issues and support service improvements.",
+            "Led feature development on Air Arabia's booking platform from design to release, including design documents, design reviews and Swagger API contracts, coordinating work across developers, QA, designers and product managers.",
+            "Built and maintained features in a legacy ASP.NET MVC (C#) backend with SQL Server, including new endpoints, request validation and error handling.",
+            "Integrated the .NET backend with search, payment and ancillary microservices via gRPC, and built REST APIs exposed through the API gateway.",
+            "Developed and supported SOAP web services for online travel agency (OTA) partners, tested with SoapUI, and used RabbitMQ to send booking confirmation emails asynchronously.",
+            "Worked with business analysts, product managers and third-party payment teams to gather requirements and deliver PCI-compliant integrations.",
+            "Investigated and resolved high-priority production issues across services, and wrote NUnit unit tests for fixes and new features, running in the CI pipeline.",
+            "Automated builds and deployments with Jenkins and Docker, and built Power BI dashboards to track recurring issues.",
+            "Mentored junior engineers through code reviews and knowledge sharing.",
         ],
     },
     {
@@ -338,20 +358,25 @@ export const experience = [
             "Intern Software Engineer (Jul 2021 – Dec 2021)",
         ],
         bullets: [
-            "Developed front-end features for a Vue.js CRM for a Sri Lankan government client, enabling administrators to create and publish dynamic forms and manage content, users and access.",
-            "Built responsive dashboards using Vue.js and React.js that worked across desktop and mobile.",
-            "Developed REST APIs using Spring Boot and MySQL, with Swagger documentation for reliable integration.",
-            "Implemented identity and access management using Keycloak.",
-            "Took part in sprint planning, design discussions and peer code reviews.",
+            "Built features for a government client's CRM in Vue.js and Vuex, letting administrators create and publish dynamic forms and manage content and users.",
+            "Developed scalable REST APIs using Spring Boot, Spring Data JPA and MySQL, with clear Swagger documentation.",
+            "Built responsive dashboards using React.js and Vue.js, helping users access and manage information efficiently.",
+            "Improved system security by implementing identity and access management with Keycloak.",
+            "Collaborated in an Agile team through design discussions, sprint planning and peer code reviews.",
         ],
     },
 ];
 
 export const achievements = [
     {
+        title: "CDU IT Code Fair 2026",
+        description:
+            "Built GovWallet NT, a privacy-first concession card wallet that proves eligibility by QR code without revealing personal details, using SD-JWT selective disclosure.",
+    },
+    {
         title: "GovHack 2025",
         description:
-            "Built an AI tool using RAG and vectorised metadata, providing full audit trails for reliable government decision support.",
+            "Built an AI decision-support tool with full audit trails to support reliable government decision-making.",
     },
     {
         title: "CDU IT Code Fair 2025",
@@ -363,31 +388,29 @@ export const achievements = [
 export const education = [
     {
         degree: "Master of Information Technology (Software Engineering)",
-        school: "Charles Darwin University, Casuarina, NT",
+        school: "Charles Darwin University, Darwin, NT",
         period: "Nov 2024 – Oct 2026",
     },
     {
-        degree: "B.Sc. (Hons) Degree in Computer Science",
-        school: "General Sir John Kotelawala Defence University, Ratmalana, Sri Lanka",
+        degree: "B.Sc. (Hons) Computer Science",
+        school: "General Sir John Kotelawala Defence University, Sri Lanka",
         period: "Jan 2018 – Jan 2022",
     },
 ];
 
 export const certifications = [
-    "Component Service: Building and managing components for developers — Squiz Academy",
-    "Microsoft AZ-900 (In progress) — Microsoft",
-    "ASP.NET Core Full Course For Beginners (.NET 10) — YouTube",
+    "Microsoft AZ-900 Azure Fundamentals (in progress) — Microsoft",
+    "ASP.NET Core (.NET 10) — Professional Development",
+    "Microsoft SQL Server 2022 Essential Training — LinkedIn Learning",
     "Power BI Essential Training — LinkedIn Learning",
     "Learning Jira (Cloud Edition) — LinkedIn Learning",
     "Getting Started with Microsoft 365 — LinkedIn Learning",
-    "Microsoft SQL Server 2022 Essential Training — LinkedIn Learning",
 ];
 
 export const compliance = [
-    "Associate Member — Australian Computer Society",
-    "Ochre (Working with Children) Card",
+    "NT Working with Children Clearance (Ochre Card)",
     "National Police Check",
-    "NT Driving Licence",
+    "NT Driver Licence",
 ];
 
 export const navLinks = [

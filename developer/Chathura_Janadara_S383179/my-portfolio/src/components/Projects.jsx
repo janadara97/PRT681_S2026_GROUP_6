@@ -2,8 +2,9 @@ import { motion } from "framer-motion";
 import { featuredProjects, otherProjects } from "../data/portfolioData";
 import ProjectCard from "./ProjectCard";
 
-// One accent per featured project, loosely tied to its domain (wet season = blue, fire = amber, sonar/water = cyan).
-const projectAccents = ["#2563EB", "#D97706", "#0891B2"];
+// One accent per featured project, loosely tied to its domain
+// (GovWallet = green, fire = amber, wet season = blue, sonar/water = cyan).
+const projectAccents = ["#059669", "#D97706", "#2563EB", "#0891B2"];
 
 export default function Projects() {
     return (
