@@ -1,10 +1,14 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { FiArrowUpRight, FiBarChart2, FiChevronDown, FiClock, FiGithub } from "react-icons/fi";
+import { FiBarChart2, FiChevronDown, FiClock, FiGithub } from "react-icons/fi";
 
 export default function ProjectCard({ project, index, accent = "#2563EB" }) {
     const [showProgress, setShowProgress] = useState(false);
     const [showReport, setShowReport] = useState(false);
+
+    // Only draw the button bar when the project has at least one button,
+    // otherwise an empty bordered strip would show (e.g. GovWallet).
+    const hasActions = project.comingSoon || project.powerBiEmbedUrl || project.githubUrl;
 
     return (
         <motion.article
@@ -52,73 +56,57 @@ export default function ProjectCard({ project, index, accent = "#2563EB" }) {
                 ))}
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-slate-100 pt-5 dark:border-slate-800">
-                {project.link && (
-                    <motion.a
-                        href={project.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        whileHover={{ scale: 1.03 }}
-                        whileTap={{ scale: 0.97 }}
-                        className="group inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white shadow-sm transition"
-                        style={{ backgroundColor: accent }}
-                    >
-                        View Live
-                        <FiArrowUpRight
-                            size={15}
-                            className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                        />
-                    </motion.a>
-                )}
+            {hasActions && (
+                <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-slate-100 pt-5 dark:border-slate-800">
+                    {project.comingSoon && (
+                        <motion.button
+                            type="button"
+                            onClick={() => setShowProgress((v) => !v)}
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            className="inline-flex items-center gap-2 rounded-full border border-dashed px-4 py-2 text-sm font-semibold transition"
+                            style={{ borderColor: `${accent}60`, color: accent, backgroundColor: `${accent}0D` }}
+                        >
+                            <FiClock size={15} />
+                            Coming Soon
+                            <FiChevronDown
+                                size={14}
+                                className={`transition-transform ${showProgress ? "rotate-180" : ""}`}
+                            />
+                        </motion.button>
+                    )}
 
-                {project.comingSoon && (
-                    <motion.button
-                        type="button"
-                        onClick={() => setShowProgress((v) => !v)}
-                        whileHover={{ scale: 1.03 }}
-                        whileTap={{ scale: 0.97 }}
-                        className="inline-flex items-center gap-2 rounded-full border border-dashed px-4 py-2 text-sm font-semibold transition"
-                        style={{ borderColor: `${accent}60`, color: accent, backgroundColor: `${accent}0D` }}
-                    >
-                        <FiClock size={15} />
-                        Coming Soon
-                        <FiChevronDown
-                            size={14}
-                            className={`transition-transform ${showProgress ? "rotate-180" : ""}`}
-                        />
-                    </motion.button>
-                )}
+                    {project.powerBiEmbedUrl && (
+                        <motion.button
+                            type="button"
+                            onClick={() => setShowReport((v) => !v)}
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition"
+                            style={{ borderColor: `${accent}40`, color: accent, backgroundColor: `${accent}0D` }}
+                        >
+                            <FiBarChart2 size={15} />
+                            View Report
+                            <FiChevronDown size={14} className={`transition-transform ${showReport ? "rotate-180" : ""}`} />
+                        </motion.button>
+                    )}
 
-                {project.powerBiEmbedUrl && (
-                    <motion.button
-                        type="button"
-                        onClick={() => setShowReport((v) => !v)}
-                        whileHover={{ scale: 1.03 }}
-                        whileTap={{ scale: 0.97 }}
-                        className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition"
-                        style={{ borderColor: `${accent}40`, color: accent, backgroundColor: `${accent}0D` }}
-                    >
-                        <FiBarChart2 size={15} />
-                        View Report
-                        <FiChevronDown size={14} className={`transition-transform ${showReport ? "rotate-180" : ""}`} />
-                    </motion.button>
-                )}
-
-                {project.githubUrl && (
-                    <motion.a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        whileHover={{ scale: 1.03 }}
-                        whileTap={{ scale: 0.97 }}
-                        className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition"
-                        style={{ borderColor: `${accent}40`, color: accent, backgroundColor: `${accent}0D` }}
-                    >
-                        <FiGithub size={15} />
-                        Source Code
-                    </motion.a>
-                )}
-            </div>
+                    {project.githubUrl && (
+                        <motion.a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition"
+                            style={{ borderColor: `${accent}40`, color: accent, backgroundColor: `${accent}0D` }}
+                        >
+                            <FiGithub size={15} />
+                            Source Code
+                        </motion.a>
+                    )}
+                </div>
+            )}
 
             <AnimatePresence>
                 {showProgress && project.progress && (

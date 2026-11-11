@@ -28,7 +28,10 @@ export const heroIntro = [
     { text: "I'm a " },
     { text: "Full-Stack Software Engineer", emphasis: "italic" },
     { text: " based in Darwin, Australia, building " },
-    { text: "multi-layered web applications and REST/SOAP integrations", emphasis: "bold" },
+    {
+        text: "multi-layered web applications and REST/SOAP integrations",
+        emphasis: "bold",
+    },
     { text: " across aviation, banking, education and telecommunications. " },
     { text: "Nearly 4 years", emphasis: "bold" },
     { text: " of commercial experience designing and shipping " },
@@ -61,7 +64,15 @@ export const coreStack = [
 export const skillGroups = [
     {
         title: "Programming Languages",
-        items: ["C#", "Java", "JavaScript", "TypeScript", "Python", "PHP", "SQL"],
+        items: [
+            "C#",
+            "Java",
+            "JavaScript",
+            "TypeScript",
+            "Python",
+            "PHP",
+            "SQL",
+        ],
     },
     {
         title: "Backend",
@@ -94,7 +105,14 @@ export const skillGroups = [
     },
     {
         title: "Databases",
-        items: ["SQL Server", "MySQL", "PostgreSQL", "SQLite", "Redis", "Firebase"],
+        items: [
+            "SQL Server",
+            "MySQL",
+            "PostgreSQL",
+            "SQLite",
+            "Redis",
+            "Firebase",
+        ],
     },
     {
         title: "Frontend & Mobile",
@@ -125,11 +143,24 @@ export const skillGroups = [
     },
     {
         title: "Testing",
-        items: ["Unit Testing", "Cross-device Testing", "NUnit", "JUnit", "Jest"],
+        items: [
+            "Unit Testing",
+            "Cross-device Testing",
+            "NUnit",
+            "JUnit",
+            "Jest",
+        ],
     },
     {
         title: "Authentication",
-        items: ["MSAL / Entra ID", "Keycloak", "Clerk", "OpenLDAP", "Firebase Auth", "JWT"],
+        items: [
+            "MSAL / Entra ID",
+            "Keycloak",
+            "Clerk",
+            "OpenLDAP",
+            "Firebase Auth",
+            "JWT",
+        ],
     },
     {
         title: "DevOps & CI/CD",
@@ -171,7 +202,12 @@ export const skillGroups = [
     },
     {
         title: "Data & Machine Learning",
-        items: ["Machine Learning", "Deep Learning", "EDA", "Acoustic Signal Processing"],
+        items: [
+            "Machine Learning",
+            "Deep Learning",
+            "EDA",
+            "Acoustic Signal Processing",
+        ],
     },
     {
         title: "Development Tools",
@@ -195,12 +231,12 @@ export const skillGroups = [
 
 export const featuredProjects = [
     {
-        title: "GovWallet NT — Privacy-First Concession Card Wallet",
-        period: "CDU IT Code Fair 2026, Darwin",
+        title: "GovWallet NT — Privacy-First Digital Credential Wallet",
+        period: "Winner, Proficient Level — CDU IT Code Fair 2026, Darwin",
         problem:
-            "Proving you are eligible for a concession usually means showing a card that reveals your personal details to whoever checks it.",
+            "Proving something simple, like your age or concession eligibility, usually means showing a card that reveals far more personal details than the person checking it needs.",
         solution:
-            "A digital wallet that lets a cardholder prove eligibility by QR code without revealing personal details, using SD-JWT selective disclosure. An ASP.NET Core issuer API signs credentials with ECDSA P-256, and two React PWAs — a wallet with a non-extractable device key and an offline verifier that shows only \"eligible\" or \"not eligible\" — are deployed on Azure, with tests and a threat model.",
+            "A privacy-first digital credential wallet that lets Territorians prove things like their age or concession eligibility by QR code, sharing only what the verifier needs, using SD-JWT selective disclosure. An ASP.NET Core issuer API signs credentials, a React wallet PWA creates a fresh proof for each scan, and a React verifier PWA checks it offline and shows only a pass or fail result. Delivered across three one-week sprints in Jira, with a threat model, unit tests and real-device testing.",
         stack: [
             "C#",
             "ASP.NET Core Web API",
@@ -216,7 +252,6 @@ export const featuredProjects = [
             "html5-qrcode",
             "SCSS",
         ],
-        link: "https://www.govwallet.wallet.chathura.com.au",
     },
     {
         title: "NT FireWatch — Geospatial Bushfire Monitoring Platform",
@@ -240,7 +275,6 @@ export const featuredProjects = [
             "Azure",
         ],
         githubUrl: "https://github.com/janadara97/nt-fire-watch",
-        link: "https://www.firewatch.chathura.com.au",
         powerBiEmbedUrl:
             "https://app.powerbi.com/view?r=eyJrIjoiMTE5ODcwZjgtZWMyZC00MDllLWFhOTctMGIzYTZkMjliNTZlIiwidCI6IjlmMjQ4NzY3LThlMWEtNDJmMy04MzZmLWMwOTJhYjk1ZmY3MCJ9",
     },
@@ -296,7 +330,8 @@ export const otherProjects = [
     {
         title: "Digital Platform for Medical Student Progression & Records",
         period: "Charles Darwin University",
-        description: "Developed a platform for tracking medical students' progress and records.",
+        description:
+            "Developed a platform for tracking medical students' progress and records.",
         stack: ["Power Apps", "Power Automate", "SharePoint", "Microsoft 365"],
     },
 ];
@@ -370,8 +405,12 @@ export const experience = [
 export const achievements = [
     {
         title: "CDU IT Code Fair 2026",
+        // winner: true makes the Achievements section show this as the big trophy card
+        winner: true,
+        award: "Winner · Coding Competition (Proficient Level)",
+        project: "GovWallet NT",
         description:
-            "Built GovWallet NT, a privacy-first concession card wallet that proves eligibility by QR code without revealing personal details, using SD-JWT selective disclosure.",
+            "Won the Coding Competition (Proficient Level) with GovWallet NT, a privacy-first digital credential wallet that lets Territorians prove their age or concession eligibility by QR code, sharing only what the verifier needs, using SD-JWT selective disclosure.",
     },
     {
         title: "GovHack 2025",

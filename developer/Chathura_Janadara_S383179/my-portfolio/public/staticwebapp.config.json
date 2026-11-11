@@ -1,0 +1,9 @@
+{
+    "routes": [
+        {
+            "route": "/resume",
+            "redirect": "/resume.pdf",
+            "statusCode": 302
+        }
+    ]
+}

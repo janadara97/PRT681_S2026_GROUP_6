@@ -1,5 +1,12 @@
 import { motion } from "framer-motion";
-import { FiArrowRight, FiChevronRight, FiDownload, FiGithub, FiLinkedin } from "react-icons/fi";
+import { FaTrophy } from "react-icons/fa";
+import {
+    FiArrowRight,
+    FiChevronRight,
+    FiDownload,
+    FiGithub,
+    FiLinkedin,
+} from "react-icons/fi";
 import profilePhoto from "../assets/profile.jpg";
 import { coreToolkit, heroIntro, personal } from "../data/portfolioData";
 
@@ -7,16 +14,25 @@ const firstName = personal.name.split(" ")[0];
 
 export default function Hero() {
     return (
-        <section id="top" className="relative overflow-hidden bg-white dark:bg-slate-900">
+        <section
+            id="top"
+            className="relative overflow-hidden bg-white dark:bg-slate-900"
+        >
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full opacity-40 blur-3xl dark:opacity-20"
-                style={{ background: "radial-gradient(circle, #2563EB, transparent 70%)" }}
+                style={{
+                    background:
+                        "radial-gradient(circle, #2563EB, transparent 70%)",
+                }}
             />
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute -bottom-24 right-0 h-80 w-80 rounded-full opacity-30 blur-3xl dark:opacity-15"
-                style={{ background: "radial-gradient(circle, #D97706, transparent 70%)" }}
+                style={{
+                    background:
+                        "radial-gradient(circle, #D97706, transparent 70%)",
+                }}
             />
             <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1.4fr_1fr] md:items-start md:py-32">
                 <motion.div
@@ -24,9 +40,19 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                 >
-                    <p className="mb-5 inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-700 dark:border-blue-900 dark:bg-blue-950 dark:text-blue-300">
-                        Darwin-Based · Current WWCC & National Police Check
-                    </p>
+                    <div className="mb-5 flex flex-wrap items-center gap-2">
+                        {/* Code Fair win, shown first; clicking jumps to the trophy card in Achievements */}
+                        <a
+                            href="#achievements"
+                            className="inline-flex items-center gap-1.5 rounded-full border border-amber-300 bg-amber-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-800 transition hover:bg-amber-100 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-300 dark:hover:bg-amber-900"
+                        >
+                            <FaTrophy size={12} aria-hidden="true" /> Winner ·
+                            CDU IT Code Fair 2026
+                        </a>
+                        <p className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-700 dark:border-blue-900 dark:bg-blue-950 dark:text-blue-300">
+                            Darwin-Based · Current WWCC & National Police Check
+                        </p>
+                    </div>
 
                     <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white sm:text-5xl">
                         Hello, I'm {firstName}.
@@ -46,7 +72,10 @@ export default function Hero() {
                             }
                             if (part.emphasis === "bold") {
                                 return (
-                                    <strong key={part.text} className="font-bold text-slate-900 dark:text-white">
+                                    <strong
+                                        key={part.text}
+                                        className="font-bold text-slate-900 dark:text-white"
+                                    >
                                         {part.text}
                                     </strong>
                                 );
@@ -65,7 +94,10 @@ export default function Hero() {
                                     key={item}
                                     className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-200"
                                 >
-                                    <FiChevronRight className="shrink-0 text-blue-700 dark:text-blue-400" size={14} />
+                                    <FiChevronRight
+                                        className="shrink-0 text-blue-700 dark:text-blue-400"
+                                        size={14}
+                                    />
                                     {item}
                                 </div>
                             ))}
