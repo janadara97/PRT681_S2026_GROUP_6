@@ -8,7 +8,7 @@ const projectAccents = ["#059669", "#D97706", "#2563EB", "#0891B2"];
 
 export default function Projects() {
     return (
-        <section id="projects" className="bg-white py-20 dark:bg-slate-900">
+        <section id="projects" className="bg-page py-20 dark:bg-slate-900">
             <div className="mx-auto max-w-6xl px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -44,7 +44,7 @@ export default function Projects() {
                             {otherProjects.map((project) => (
                                 <div
                                     key={project.title}
-                                    className="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-800 dark:bg-slate-950"
+                                    className="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-950"
                                 >
                                     <h4 className="font-semibold text-slate-900 dark:text-white">
                                         {project.title}
@@ -56,7 +56,7 @@ export default function Projects() {
                                         {project.stack.map((tech) => (
                                             <span
                                                 key={tech}
-                                                className="rounded-full bg-white px-2.5 py-0.5 text-xs font-medium text-slate-500 dark:bg-slate-800 dark:text-slate-400"
+                                                className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-500 dark:bg-slate-800 dark:text-slate-400"
                                             >
                                                 {tech}
                                             </span>

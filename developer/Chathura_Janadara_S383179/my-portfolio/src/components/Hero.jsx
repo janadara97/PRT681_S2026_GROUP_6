@@ -16,7 +16,7 @@ export default function Hero() {
     return (
         <section
             id="top"
-            className="relative overflow-hidden bg-white dark:bg-slate-900"
+            className="relative overflow-hidden bg-page dark:bg-slate-900"
         >
             <div
                 aria-hidden="true"

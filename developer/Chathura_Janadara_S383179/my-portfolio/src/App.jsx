@@ -14,7 +14,7 @@ function App() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900">
+    <div className="min-h-screen bg-page dark:bg-slate-900">
       <Navbar theme={theme} toggleTheme={toggleTheme} />
       <Hero />
       <About />

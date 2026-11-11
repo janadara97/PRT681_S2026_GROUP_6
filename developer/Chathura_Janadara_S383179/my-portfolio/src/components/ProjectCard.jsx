@@ -1,14 +1,16 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { FiBarChart2, FiChevronDown, FiClock, FiGithub } from "react-icons/fi";
+import { FiBarChart2, FiChevronDown, FiClock, FiGithub, FiPlayCircle } from "react-icons/fi";
 
 export default function ProjectCard({ project, index, accent = "#2563EB" }) {
     const [showProgress, setShowProgress] = useState(false);
     const [showReport, setShowReport] = useState(false);
+    const [showVideo, setShowVideo] = useState(false);
 
     // Only draw the button bar when the project has at least one button,
-    // otherwise an empty bordered strip would show (e.g. GovWallet).
-    const hasActions = project.comingSoon || project.powerBiEmbedUrl || project.githubUrl;
+    // otherwise an empty bordered strip would show.
+    const hasActions =
+        project.comingSoon || project.powerBiEmbedUrl || project.videoEmbedUrl || project.githubUrl;
 
     return (
         <motion.article
@@ -17,7 +19,13 @@ export default function ProjectCard({ project, index, accent = "#2563EB" }) {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className="rounded-2xl border border-t-4 border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md dark:border-slate-800 dark:bg-slate-900 sm:p-8"
-            style={{ borderTopColor: accent }}
+            style={{
+                borderTopColor: accent,
+                // A soft wash of the project's own colour, strongest in the top-left corner.
+                // The colour is see-through (the "1F" / "05" on the end is opacity), so the same
+                // value sits on white in light mode and on dark slate in dark mode.
+                backgroundImage: `linear-gradient(135deg, ${accent}1F 0%, ${accent}05 60%, transparent 100%)`,
+            }}
         >
             <div>
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white">{project.title}</h3>
@@ -49,7 +57,7 @@ export default function ProjectCard({ project, index, accent = "#2563EB" }) {
                 {project.stack.map((tech) => (
                     <span
                         key={tech}
-                        className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300"
+                        className="rounded-full bg-white/80 px-3 py-1 text-xs font-medium text-slate-600 ring-1 ring-slate-200 dark:bg-slate-800/80 dark:text-slate-300 dark:ring-slate-700"
                     >
                         {tech}
                     </span>
@@ -88,6 +96,21 @@ export default function ProjectCard({ project, index, accent = "#2563EB" }) {
                             <FiBarChart2 size={15} />
                             View Report
                             <FiChevronDown size={14} className={`transition-transform ${showReport ? "rotate-180" : ""}`} />
+                        </motion.button>
+                    )}
+
+                    {project.videoEmbedUrl && (
+                        <motion.button
+                            type="button"
+                            onClick={() => setShowVideo((v) => !v)}
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition"
+                            style={{ borderColor: `${accent}40`, color: accent, backgroundColor: `${accent}0D` }}
+                        >
+                            <FiPlayCircle size={15} />
+                            Watch Intro
+                            <FiChevronDown size={14} className={`transition-transform ${showVideo ? "rotate-180" : ""}`} />
                         </motion.button>
                     )}
 
@@ -168,6 +191,32 @@ export default function ProjectCard({ project, index, accent = "#2563EB" }) {
                                 title={`${project.title} — Power BI Report`}
                                 src={project.powerBiEmbedUrl}
                                 className="h-full w-full border-0"
+                                allowFullScreen
+                            />
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {showVideo && project.videoEmbedUrl && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="overflow-hidden"
+                    >
+                        <div className="mt-4 aspect-video w-full overflow-hidden rounded-xl border border-slate-200 bg-black dark:border-slate-800">
+                            {/* The player is only created when the panel opens, so the page doesn't
+                                load YouTube for visitors who never click the button.
+                                referrerPolicy is needed: YouTube refuses to play embeds that send no referrer. */}
+                            <iframe
+                                title={`${project.title} — Intro Video`}
+                                src={project.videoEmbedUrl}
+                                className="h-full w-full border-0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerPolicy="strict-origin-when-cross-origin"
                                 allowFullScreen
                             />
                         </div>

@@ -3,7 +3,7 @@ import { quickFacts } from "../data/portfolioData";
 
 export default function About() {
   return (
-    <section id="about" className="bg-slate-50 py-20 dark:bg-slate-950">
+    <section id="about" className="bg-page-alt py-20 dark:bg-slate-950">
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

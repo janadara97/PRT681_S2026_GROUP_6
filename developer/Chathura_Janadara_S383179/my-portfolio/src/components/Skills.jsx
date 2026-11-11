@@ -45,7 +45,7 @@ function SkillChip({ item }) {
 
 export default function Skills() {
   return (
-    <section id="skills" className="bg-slate-50 py-20 dark:bg-slate-950">
+    <section id="skills" className="bg-page-alt py-20 dark:bg-slate-950">
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

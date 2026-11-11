@@ -7,7 +7,7 @@ export default function Navbar({ theme, toggleTheme }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-900/80">
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-page/80 backdrop-blur dark:border-slate-800 dark:bg-slate-900/80">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a href="#top" className="text-lg font-bold tracking-tight text-slate-900 dark:text-white">
           Chathura<span className="text-blue-700 dark:text-blue-400">.</span>
@@ -49,7 +49,7 @@ export default function Navbar({ theme, toggleTheme }) {
       </nav>
 
       {open && (
-        <div className="border-t border-slate-200 bg-white px-6 pb-4 dark:border-slate-800 dark:bg-slate-900 md:hidden">
+        <div className="border-t border-slate-200 bg-page px-6 pb-4 dark:border-slate-800 dark:bg-slate-900 md:hidden">
           <div className="flex flex-col gap-3 pt-3">
             {navLinks.map((link) => (
               <a

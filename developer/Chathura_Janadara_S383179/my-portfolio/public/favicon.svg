@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <!-- Same blues as the site's buttons, slightly lighter at the top for depth -->
+    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2563eb" />
+      <stop offset="1" stop-color="#1e40af" />
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded blue tile -->
+  <rect width="64" height="64" rx="14" fill="url(#tile)" />
+
+  <!-- The "C", drawn as a thick arc so it looks the same everywhere (no font needed) -->
+  <path d="M37 21.3 A14 14 0 1 0 37 42.7" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" />
+
+  <!-- Amber dot, echoing the "Chathura." logo in the navbar -->
+  <circle cx="48" cy="44" r="5.5" fill="#f59e0b" />
+</svg>

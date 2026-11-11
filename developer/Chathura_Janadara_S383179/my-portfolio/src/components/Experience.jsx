@@ -3,7 +3,7 @@ import { experience } from "../data/portfolioData";
 
 export default function Experience() {
   return (
-    <section id="experience" className="bg-white py-20 dark:bg-slate-900">
+    <section id="experience" className="bg-page py-20 dark:bg-slate-900">
       <div className="mx-auto max-w-4xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -27,7 +27,7 @@ export default function Experience() {
               transition={{ duration: 0.45, delay: i * 0.08 }}
               className="relative"
             >
-              <span className="absolute -left-[2.35rem] top-1.5 h-3 w-3 rounded-full border-2 border-blue-700 bg-white dark:border-blue-400 dark:bg-slate-900" />
+              <span className="absolute -left-[2.35rem] top-1.5 h-3 w-3 rounded-full border-2 border-blue-700 bg-page dark:border-blue-400 dark:bg-slate-900" />
               <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
                 {job.period}
               </p>

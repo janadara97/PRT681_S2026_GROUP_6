@@ -252,6 +252,10 @@ export const featuredProjects = [
             "html5-qrcode",
             "SCSS",
         ],
+        githubUrl: "https://github.com/janadara97/GovWalletNT",
+        // youtube-nocookie.com = YouTube's privacy mode (no tracking cookies until the video is played).
+        // autoplay=1 starts it as soon as "Watch Intro" is clicked; rel=0 keeps suggested videos to this channel.
+        videoEmbedUrl: "https://www.youtube-nocookie.com/embed/Pn1rUyJb_Yo?autoplay=1&rel=0",
     },
     {
         title: "NT FireWatch — Geospatial Bushfire Monitoring Platform",

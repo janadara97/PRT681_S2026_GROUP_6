@@ -4,7 +4,7 @@ import { compliance, education } from "../data/portfolioData";
 
 export default function EducationCerts() {
     return (
-        <section id="education" className="bg-white py-20 dark:bg-slate-900">
+        <section id="education" className="bg-page py-20 dark:bg-slate-900">
             <div className="mx-auto max-w-6xl px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

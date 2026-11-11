@@ -11,7 +11,7 @@ const others = achievements.filter((item) => !item.winner);
 
 export default function Achievements() {
   return (
-    <section id="achievements" className="bg-slate-50 py-20 dark:bg-slate-950">
+    <section id="achievements" className="bg-page-alt py-20 dark:bg-slate-950">
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
